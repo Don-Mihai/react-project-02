@@ -59,7 +59,7 @@ function CreateOrder () {
             <textarea name="describe" onChange={handleChangeSecondary} value={formValues?.describe} ></textarea>
 
             <div>
-                <button onClick={placeOrder}>Создать заказ</button>
+                <button className={'order__button'} onClick={placeOrder}>Создать заказ</button>
             </div>
 
 

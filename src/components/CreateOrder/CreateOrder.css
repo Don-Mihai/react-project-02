@@ -8,3 +8,9 @@
 .order__input-name {
     width: 100%;
 }
+
+.order__button {
+    padding: 8px 15px;
+    background-color: #000;
+    color: #fff;
+}
