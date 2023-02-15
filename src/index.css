@@ -1,8 +1,7 @@
-.header {
-  height: 100px;
-  background-color: rgb(185, 183, 183);
+body {
+  background-color: rgb(229, 229, 229);
 }
 
-.item {
-  border: 1px solid grey;
+* {
+  box-sizing: border-box;
 }

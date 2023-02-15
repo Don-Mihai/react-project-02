@@ -1,12 +1,13 @@
+import CreateOrder from './components/CreateOrder/CreateOrder';
 import Header from './components/Header';
-import Main from './components/Main';
+
 
 
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-      <Main></Main>
+      {/* <Header></Header> */}
+      <CreateOrder></CreateOrder>
     </div>
   );
 }

@@ -1,0 +1,10 @@
+.order {
+    width: 600px;
+    padding: 15px;
+    background-color: #fff;
+
+}
+
+.order__input-name {
+    width: 100%;
+}
