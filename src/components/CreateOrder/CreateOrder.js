@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Orders from "../Orders/Orders";
-import './CreateOrder.css';
+import './CreateOrder.scss';
 
 function CreateOrder () {
     const [formValues, setFormValues] = useState({})

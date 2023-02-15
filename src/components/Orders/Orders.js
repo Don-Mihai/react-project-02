@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './Orders.css'
+import './Orders.scss'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
