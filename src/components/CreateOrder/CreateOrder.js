@@ -54,6 +54,7 @@ function CreateOrder () {
 
     return (
         <div className="order">
+            <h1>Фриланс Биржа</h1>
             <input name="name" className="order__input-name" onChange={handleChange} value={formValues?.name} />
 
             <textarea name="describe" onChange={handleChangeSecondary} value={formValues?.describe} ></textarea>
