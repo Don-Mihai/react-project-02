@@ -1,13 +1,10 @@
-import CreateOrder from './components/CreateOrder/CreateOrder';
-import Header from './components/Header';
-
-
+import Home from './pages/Home'
+import Orders from './pages/Orders'
 
 function App() {
   return (
     <div className="App">
-      {/* <Header></Header> */}
-      <CreateOrder></CreateOrder>
+        <Home></Home>
     </div>
   );
 }
