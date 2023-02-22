@@ -1,0 +1,18 @@
+@charset "UTF-8";
+.orders-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.orders-item__details {
+  flex-direction: row;
+}
+
+.orders-item__price {
+  justify-content: end;
+}
+
+/* мои изменения */
+/* //comment */
