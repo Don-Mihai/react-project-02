@@ -1,8 +1,14 @@
-.orders__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  &__details {
+    flex-direction: row;
+  }
+  &__price {
+    justify-content: end;
+  }
 }
 
 /* мои изменения */

@@ -4,6 +4,7 @@ import logo from './logo.png';
 const Header = () => {
 
     return(
+        // todo: вёрстка хэдэра
         <header className='header'>
             <img className='header__logo' src={logo} alt='logo'></img>
             <div className='header__navigation'>
