@@ -1,14 +1,14 @@
 import './Header.scss'
 import logo from './logo.png';
+import { Link } from "react-router-dom";
 
 const Header = () => {
 
     return(
-        // todo: вёрстка хэдэра
         <header className='header'>
-            <img className='header__logo' src={logo} alt='logo'></img>
+            <Link to={'/'}><img className='header__logo' src={logo} alt='logo'></img></Link>
             <div className='header__navigation'>
-            <a className='header__navigation_item' href='/'>Для заказчика</a>
+            <Link to={'/orders'} className='header__navigation_item' >Для заказчика</Link>
             <a className='header__navigation_item' href='/'>Для исполнителя</a>
             <a className='header__navigation_item' href='/'>Фрилансеры</a>
             <a className='header__navigation_item' href='/'>Контакты</a>
