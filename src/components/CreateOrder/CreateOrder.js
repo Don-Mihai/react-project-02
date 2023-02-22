@@ -1,80 +1,91 @@
 import { useState } from "react";
 import Orders from "../Orders/Orders";
-import './CreateOrder.scss';
+import "./CreateOrder.scss";
 
-function CreateOrder () {
-    const [formValues, setFormValues] = useState({})
-    const [orders, setOrders] = useState([])
+function CreateOrder() {
+  const [formValues, setFormValues] = useState({});
+  const [orders, setOrders] = useState([]);
 
+  const handleDelete = (id) => {
+   const newOrders = orders.filter((order) => {
+      if (order.id === id) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    setOrders(newOrders)
+  };
 
-    const  handleDelete = (id) => {
+  const handleChange = (event) => {
+    // взять данные инпута
+    setFormValues({ ...formValues, name: event.target.value });
 
-        // создать новый список, где не будет заказа по котормоу кликнули
-        const newOrders = orders.filter((order) => {
-            if(order.id === id) {
-                return false
-            } else {
-                return true
-            }
-        })
+    console.log(formValues);
+  };
 
-        setOrders(newOrders)
+  const handleChangeSecondary = (event) => {
+    // взять данные инпута
+    setFormValues({ ...formValues, describe: event.target.value });
+    console.log(formValues);
+  };
+
+  const clearInput = () => {
+    setFormValues({
+      name: "",
+      describe: "",
+    });
+  };
+
+  const placeOrder = () => {
+    const newOrder = {
+      id: Math.random(),
+      name: formValues.name,
+      describe: formValues.describe,
+    };
+
+    // валидация на заполнение полей
+    if (!formValues?.describe?.length || !formValues?.name?.length) {
+      return;
     }
 
-    const handleChange = (event) => {
-        // взять данные инпута
-        setFormValues({...formValues, name: event.target.value})
-    }
+    // вызывает баги
+    // setOrders([...orders, newOrder])
 
-    const handleChangeSecondary = (event) => {
-        // взять данные инпута
-        setFormValues({...formValues, describe: event.target.value})
-    }
+    setOrders((prev) => {
+      return [...prev, newOrder];
+    });
 
-    const clearInput = () => {
-        setFormValues({
-            name: '',
-            describe: '',
-        })
-    }
+    clearInput();
+  };
 
-    const placeOrder = () => {
-        const newOrder = {
-            id: Math.random(),
-            name: formValues.name,
-            describe: formValues.describe
-        }
+  return (
+    <div className="order">
+      <h1>Фриланс Биржа</h1>
+      <input
+        name="name"
+        className="order__input-name"
+        onChange={handleChange}
+        value={formValues?.name}
+      />
 
-        // валидация на заполнение полей
-        if(!formValues?.describe?.length || !formValues?.name?.length) {
-            return;
-        }
+      <textarea
+        name="describe"
+        onChange={handleChangeSecondary}
+        value={formValues?.describe}
+      ></textarea>
 
-        // вызывает баги
-        // setOrders([...orders, newOrder])
+      <div>
+        <button className={"order__button"} onClick={placeOrder}>
+          Создать заказ
+        </button>
+      </div>
 
-        setOrders(prev => {
-            return [...prev, newOrder]
-        })
-
-        clearInput()
-    }
-
-    return (
-        <div className="order">
-            <h1>Фриланс Биржа</h1>
-            <input name="name" className="order__input-name" onChange={handleChange} value={formValues?.name} />
-
-            <textarea name="describe" onChange={handleChangeSecondary} value={formValues?.describe} ></textarea>
-
-            <div>
-                <button className={'order__button'} onClick={placeOrder}>Создать заказ</button>
-            </div>
-
-
-            <Orders orders={orders} onDelete={handleDelete}><p>Мой текст</p></Orders>
-        </div>
-    )
+      <Orders orders={orders} onDelete={handleDelete}>
+        <p>Мой текст</p>
+      </Orders>
+    </div>
+  );
 }
 
-export default CreateOrder
+export default CreateOrder;

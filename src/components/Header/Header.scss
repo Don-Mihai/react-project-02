@@ -1,4 +1,51 @@
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 80px;
-    background-color: rgb(246, 176, 176);
+    background-color: fff;
+    color: #212336;
+
+
+    &__logo {
+        height: 70px;
+        width: 100px;
+    }
+
+    &__navigation {
+        display: flex;
+        gap: 60px;
+
+        &_item {
+            border-bottom: 2px solid transparent;
+
+            &:hover {
+                border-bottom: 2px solid #FAA342;
+            }
+
+            &-last-child {
+                &:hover {
+                    color: #FAA342;
+                }
+            }
+        }
+    }
 }
+// nav {
+//     height: 200px;
+//     width: 30%;
+//     position: fixed;
+//     background-color: #98a2eb80;
+//     display: flex;
+//     align-items: center;
+//     }
+    
+//     .burger-btn {
+//       background-image: url(menu.png);
+//       background-size: cover;
+//       background-position: center;
+//     width: 40px;
+//     height: 30px;
+//     z-index: 100;
+//     cursor: pointer;
+//     }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Order from "../Order/Order"
 import "./Orders.scss";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -46,6 +47,7 @@ function Orders({ orders, onDelete, children }) {
                 <div>Договорная</div>
                 <img></img>
               </div>
+
 
               <IconButton
                 onClick={() => onDelete(object.id)}
