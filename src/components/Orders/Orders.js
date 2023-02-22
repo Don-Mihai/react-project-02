@@ -1,7 +1,6 @@
 import { useState } from "react";
 import './Orders.scss'
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Order from '../Order/Order';
 
 
 
@@ -15,7 +14,6 @@ function Orders({orders, onDelete, children}) {
     return (
         <div>
             <h2>Заказы ({orders?.length})</h2>
-            {children}
 
             <input onChange={handleChange} value={search} placeholder="Поиск..." />
             {orders
@@ -25,18 +23,11 @@ function Orders({orders, onDelete, children}) {
                         return true;
                     } else return false;
                 })
-                .map((object, index) => {
+                .map((object) => {
+                    // todo: отдельынй компонент заказов
                     return (
-                        <div className="orders__item" key={index} style={{ border: '1px solid red' }}>
-                            <div>
-                                <div>{object?.name}</div>
-                                <div>{object?.describe}</div>
-                            </div>
-                            
-                            <IconButton onClick={() => onDelete(object.id)} aria-label="delete" size="small">
-                                <DeleteIcon fontSize="small" />
-                            </IconButton>
-                        </div>
+                        <Order key={object.id} object={object} onDelete={onDelete} />
+                        // Order({index: index})
                     );
                 })}
         </div>

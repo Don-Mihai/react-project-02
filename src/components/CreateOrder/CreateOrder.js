@@ -7,21 +7,28 @@ function CreateOrder () {
     const [orders, setOrders] = useState([])
 
 
-    const  handleDelete = () => {
-        const arr = [{}, {}, {}]
+    const  handleDelete = (id) => {
+
+        // создать новый список, где не будет заказа по котормоу кликнули
+        const newOrders = orders.filter((order) => {
+            if(order.id === id) {
+                return false
+            } else {
+                return true
+            }
+        })
+
+        setOrders(newOrders)
     }
 
     const handleChange = (event) => {
         // взять данные инпута
         setFormValues({...formValues, name: event.target.value})
-
-        console.log(formValues)
     }
 
     const handleChangeSecondary = (event) => {
         // взять данные инпута
         setFormValues({...formValues, describe: event.target.value})
-        console.log(formValues)
     }
 
     const clearInput = () => {
@@ -33,6 +40,7 @@ function CreateOrder () {
 
     const placeOrder = () => {
         const newOrder = {
+            id: Math.random(),
             name: formValues.name,
             describe: formValues.describe
         }
