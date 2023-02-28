@@ -9,11 +9,11 @@ const Header = () => {
             <Link to={'/'}><img className='header__logo' src={logo} alt='logo'></img></Link>
             <div className='header__navigation'>
             <Link to={'/orders'} className='header__navigation_item' >Для заказчика</Link>
-            <a className='header__navigation_item' href='/'>Для исполнителя</a>
-            <a className='header__navigation_item' href='/'>Фрилансеры</a>
-            <a className='header__navigation_item' href='/'>Контакты</a>
+            <Link to={'/orders'} className='header__navigation_item' >Для исполнителя</Link>
+            <Link to={'/orders'} className='header__navigation_item' >Фрилансеры</Link>
+            <Link to={'/orders'} className='header__navigation_item' >Контакты</Link>
             </div>
-            <a className='header__navigation_item-last-child' href='/'>Личный кабинет</a>
+            <Link to={'/orders'} className='header__navigation_item' >Личный кабинет</Link>
         </header>
     )
 }

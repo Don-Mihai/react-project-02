@@ -17,6 +17,7 @@
         gap: 60px;
 
         &_item {
+            font-size: 20px;
             border-bottom: 2px solid transparent;
 
             &:hover {
@@ -24,6 +25,7 @@
             }
 
             &-last-child {
+                font-size: 20px;
                 &:hover {
                     color: #FAA342;
                 }

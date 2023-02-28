@@ -1,0 +1,94 @@
+.home {
+    &__container {
+        max-width: 1450px;
+        margin: 0 auto;
+    }
+
+    &__top {
+        display: flex;
+        flex-wrap: nowrap;
+
+        &_titles {
+            margin-top: 172px;
+        }
+
+        &_title {
+            font-family: 'Alumni Sans', sans-serif;
+            font-size: 90px;
+            font-weight: bold;
+        }
+
+        &_subtitle {
+            font-size: 36px;
+            font-weight: normal;
+            white-space: nowrap;
+            line-height: 25px;
+        }
+
+        &_buttons {
+            display: flex;
+            margin-top: 55px;
+            gap: 39px;
+        }
+
+        &_button {
+            width: 276px;
+            height: 82px;
+            border: 1px solid #FAA342;
+            border-radius: 15px;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff;
+            color: #212336;
+            font-size: 26px;
+        }
+
+        &_picture {
+            width: 852px;
+            height: 619px;
+        }
+    }
+
+    &__text {
+        display: flex;
+        margin-top: 110px;
+        gap: 119px;
+        font-family: 'Montserrat', sans-serif;
+
+        &_box {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        &_title {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        &_list {
+            line-height: 56px;
+            font-size: 25px;
+
+            &-dot {
+                color: #FAA342;
+            }
+        }
+    }
+
+    &__workers {
+        margin-top: 110px;
+        height: 946px;
+
+        &_title {
+            font-size: 35px;
+        }
+
+        &_subtitle {
+            font-size: 32px;
+            font-weight: 100;
+            line-height: 56px;
+        }
+    }
+
+
+}
