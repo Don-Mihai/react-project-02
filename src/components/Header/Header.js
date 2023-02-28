@@ -13,7 +13,7 @@ const Header = () => {
             <Link to={'/orders'} className='header__navigation_item' >Фрилансеры</Link>
             <Link to={'/orders'} className='header__navigation_item' >Контакты</Link>
             </div>
-            <Link to={'/orders'} className='header__navigation_item' >Личный кабинет</Link>
+            <Link to={'/orders'} className='header__navigation_item-pers' >Личный кабинет</Link>
         </header>
     )
 }
