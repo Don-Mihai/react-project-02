@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "name": "Драма",
+      "describe": "Описание фильма",
+      "id": 3
+    },
+    {
+      "name": "dddddddd",
+      "describe": "ddddd",
+      "id": 4
+    },
+    {
+      "name": "a",
+      "describe": "a",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

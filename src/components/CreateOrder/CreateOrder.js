@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Orders from "../Orders/Orders";
 import "./CreateOrder.scss";
+import axios from 'axios';
 
 function CreateOrder() {
   const [formValues, setFormValues] = useState({});
@@ -22,19 +23,24 @@ function CreateOrder() {
   useEffect(() => {
     inputRef.current.focus()
   }, [])
-  
+
+
+  useEffect(async () => {
+    const data = await (await axios.get('http://localhost:3001/posts')).data
+    setOrders(data)
+  }, [])
 
   const handleChange = (event) => {
     // взять данные инпута
     setFormValues({ ...formValues, name: event.target.value });
 
-    console.log(formValues);
+    // console.log(formValues);
   };
 
   const handleChangeSecondary = (event) => {
     // взять данные инпута
     setFormValues({ ...formValues, describe: event.target.value });
-    console.log(formValues);
+    // console.log(formValues);
   };
 
   const clearInput = () => {
@@ -46,7 +52,6 @@ function CreateOrder() {
 
   const placeOrder = () => {
     const newOrder = {
-      id: Math.random(),
       name: formValues.name,
       describe: formValues.describe,
     };
@@ -62,6 +67,8 @@ function CreateOrder() {
     setOrders((prev) => {
       return [...prev, newOrder];
     });
+
+    axios.post('http://localhost:3001/posts', newOrder)
 
     clearInput();
   };

@@ -16,12 +16,14 @@ const Home = () => {
               для поиска нужных друг другу людей
             </h2>
             <div className="home__top_buttons">
+            <Link to={"orders/create"}>
               <button
                 className="home__top_button home__top_button-create"
                 type="button"
               >
                 Создать заказ
               </button>
+              </Link>
               <button
                 className="home__top_button home__top_button-search"
                 type="button"
