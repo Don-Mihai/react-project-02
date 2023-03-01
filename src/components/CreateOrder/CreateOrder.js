@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Orders from "../Orders/Orders";
 import "./CreateOrder.scss";
 
 function CreateOrder() {
   const [formValues, setFormValues] = useState({});
   const [orders, setOrders] = useState([]);
+
+  const inputRef = useRef(null)
 
   const handleDelete = (id) => {
    const newOrders = orders.filter((order) => {
@@ -16,6 +18,11 @@ function CreateOrder() {
     });
     setOrders(newOrders)
   };
+
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
+  
 
   const handleChange = (event) => {
     // взять данные инпута
@@ -63,6 +70,8 @@ function CreateOrder() {
     <div className="order">
       <h1>Фриланс Биржа</h1>
       <input
+        // autoFocus
+        ref={inputRef}
         name="name"
         className="order__input-name"
         onChange={handleChange}
@@ -80,10 +89,7 @@ function CreateOrder() {
           Создать заказ
         </button>
       </div>
-
-      <Orders orders={orders} onDelete={handleDelete}>
-        <p>Мой текст</p>
-      </Orders>
+      <Orders orders={orders} onDelete={handleDelete}/>
     </div>
   );
 }
