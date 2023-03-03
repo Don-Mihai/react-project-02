@@ -32,6 +32,9 @@
         }
 
         &_button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 276px;
             height: 82px;
             border: 1px solid #FAA342;
@@ -43,8 +46,8 @@
         }
 
         &_picture {
-            width: 852px;
-            height: 619px;
+            width: 790px;
+            height: 580px;
         }
     }
 
