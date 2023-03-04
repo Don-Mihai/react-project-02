@@ -1,11 +1,18 @@
+import React from 'react';
 import { useState } from "react";
-import Order from "../Order/Order"
 import "./Orders.scss";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { IOrder } from '../CreateOrder/CreateOrder';
 
-function Orders({ orders, onDelete, children }) {
-  const [search, setSearch] = useState("");
+interface IProps {
+  orders: IOrder[];
+  onDelete: (id: number) => void;
+}
+
+
+function Orders({ orders, onDelete }: IProps) {
+  const [search, setSearch] = useState<string>('');
 
   const handleChange = (event) => {
     setSearch(event.target.value);
@@ -14,7 +21,6 @@ function Orders({ orders, onDelete, children }) {
   return (
     <div>
       <h2>Заказы ({orders?.length})</h2>
-      {children}
 
       <input onChange={handleChange} value={search} placeholder="Поиск..." />
       {orders
