@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
 
     return(
-        <header className='header'>
+        <Header className='header'>
             <Link to={'/'}><img className='header__logo' src={logo} alt='logo'></img></Link>
             <div className='header__navigation'>
             <Link to={'/orders/create'} className='header__navigation_item' >Для заказчика</Link>
@@ -13,7 +13,7 @@ const Header = () => {
             <Link to={'/orders'} className='header__navigation_item' >Фрилансеры</Link>
             <Link to={'/orders'} className='header__navigation_item' >Контакты</Link>
             </div>
-            <Link to={'/orders'} className='header__navigation_item-pers' >Личный кабинет</Link>
+            <Link to={'/orders'} className='header__navigation header__navigation_item-pers' >Личный кабинет</Link>
             <div className="hamburger-menu">
                 <input id="menu__toggle" type="checkbox" />
                 <label className="menu__btn" for="menu__toggle">
@@ -27,7 +27,7 @@ const Header = () => {
                     <Link to={'/orders/'} className="menu__item">Личный кабинет</Link>
                 </ul>
             </div>
-        </header>
+        </Header>
     )
 }
 

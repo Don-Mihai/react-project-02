@@ -24,13 +24,14 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <Link to={"/"}>
+          <div className="home__top_item-picture"><Link to={"/"}>
             <img
               className="home__top_picture"
               src={home_picture}
               alt="people"
             ></img>
           </Link>
+          </div>
         </div>
         <div className="home__text">
           <div className="home__text_box">

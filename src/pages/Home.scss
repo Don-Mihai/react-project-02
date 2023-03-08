@@ -6,7 +6,7 @@
 
     &__top {
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: nowrap;;
 
         &_titles {
             margin-top: 172px;
@@ -46,8 +46,10 @@
         }
 
         &_picture {
-            width: 790px;
-            height: 580px;
+            max-width: 100%;
+  height: auto;
+            // width: 790px;
+            // height: 580px;
         }
     }
 
