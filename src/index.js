@@ -16,6 +16,7 @@ const router = createBrowserRouter([
         path: '/orders',
         element: <Orders />,
     },
+    // относится к заказу, поэтому перенести его
     {
         path: '/orders/create',
         element: <CreateOrder />,
