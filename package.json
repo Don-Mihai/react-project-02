@@ -25,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "json": "json-server --watch db.json --port 3001",
+    "json mac": "npx json-server --watch db.json --port 3001",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
