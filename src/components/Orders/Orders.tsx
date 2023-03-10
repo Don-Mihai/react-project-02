@@ -4,6 +4,7 @@ import "./Orders.scss";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IOrder } from '../CreateOrder/CreateOrder';
+import axios from 'axios';
 
 interface IProps {
   orders: IOrder[];
@@ -11,10 +12,17 @@ interface IProps {
 }
 
 
-function Orders({ orders, onDelete }: IProps) {
+function Orders({ }: IProps) {
   const [search, setSearch] = useState<string>('');
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
-  const handleChange = (event) => {
+  // @ts-ignore
+  useEffect(async () => {
+    const data = await (await axios.get('http://localhost:3001/posts')).data
+    setOrders(data)
+  }, [])
+
+  const handleChange = (event: any) => {
     setSearch(event.target.value);
   };
 
@@ -56,7 +64,7 @@ function Orders({ orders, onDelete }: IProps) {
 
 
               <IconButton
-                onClick={() => onDelete(object.id)}
+                onClick={() => console.log('del')}
                 aria-label="delete"
                 size="small"
               >

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useEffect, useRef, useState } from "react";
-import Orders from "../Orders/Orders";
 import "./CreateOrder.scss";
 import axios from 'axios';
 
@@ -37,12 +36,6 @@ function CreateOrder() {
 
   useEffect(() => {
     inputRef.current.focus()
-  }, [])
-
-// @ts-ignore
-  useEffect(async () => {
-    const data = await (await axios.get('http://localhost:3001/posts')).data
-    setOrders(data)
   }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +98,6 @@ function CreateOrder() {
           Создать заказ
         </button>
       </div>
-      <Orders orders={orders} onDelete={handleDelete}/>
     </div>
   );
 }
