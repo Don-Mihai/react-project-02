@@ -1,5 +1,5 @@
 import Home from './pages/Home'
-import Orders from './pages/Orders'
+import Orders from './pages/Order'
 
 
 function App() {

@@ -1,28 +1,25 @@
 import React from 'react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Orders.scss";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IOrder } from '../CreateOrder/CreateOrder';
 import axios from 'axios';
 
-interface IProps {
-  orders: IOrder[];
-  onDelete: (id: number) => void;
-}
 
 
-function Orders({ }: IProps) {
+
+function Orders() {
   const [search, setSearch] = useState<string>('');
   const [orders, setOrders] = useState<IOrder[]>([]);
 
   // @ts-ignore
   useEffect(async () => {
-    const data = await (await axios.get('http://localhost:3001/posts')).data
+    const data: IOrder[] = await (await axios.get('http://localhost:3001/posts')).data
     setOrders(data)
   }, [])
 
-  const handleChange = (event: any) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
