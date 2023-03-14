@@ -1,20 +1,31 @@
-import { useState } from "react";
-import Order from "../Order/Order"
+import React from 'react';
+import { useState, useEffect } from "react";
 import "./Orders.scss";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { IOrder } from '../CreateOrder/CreateOrder';
+import axios from 'axios';
 
-function Orders({ orders, onDelete, children }) {
-  const [search, setSearch] = useState("");
 
-  const handleChange = (event) => {
+
+
+function Orders() {
+  const [search, setSearch] = useState<string>('');
+  const [orders, setOrders] = useState<IOrder[]>([]);
+
+  // @ts-ignore
+  useEffect(async () => {
+    const data: IOrder[] = await (await axios.get('http://localhost:3001/posts')).data
+    setOrders(data)
+  }, [])
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
 
   return (
     <div>
       <h2>Заказы ({orders?.length})</h2>
-      {children}
 
       <input onChange={handleChange} value={search} placeholder="Поиск..." />
       {orders
@@ -50,7 +61,7 @@ function Orders({ orders, onDelete, children }) {
 
 
               <IconButton
-                onClick={() => onDelete(object.id)}
+                onClick={() => console.log('del')}
                 aria-label="delete"
                 size="small"
               >

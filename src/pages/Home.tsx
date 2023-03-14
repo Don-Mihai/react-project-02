@@ -1,7 +1,8 @@
+import React from 'react';
 import { Link } from "react-router-dom";
 import Header from "../components/Header/Header";
 import "./Home.scss";
-import home_picture from "./home_picture.png";
+// import home_picture from "./home_picture.png";
 import Footer from "../components/Footer/Footer";
 
 const Home = () => {
@@ -27,7 +28,7 @@ const Home = () => {
           <div className="home__top_item-picture"><Link to={"/"}>
             <img
               className="home__top_picture"
-              src={home_picture}
+              src={'/home_picture.png'}
               alt="people"
             ></img>
           </Link>

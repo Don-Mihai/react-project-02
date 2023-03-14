@@ -1,46 +1,51 @@
+import React from 'react'
 import { useEffect, useRef, useState } from "react";
-import Orders from "../Orders/Orders";
 import "./CreateOrder.scss";
 import axios from 'axios';
 
+
+export interface IOrder {
+  id: number;
+  name: string;
+  describe: string;
+}
+
+type TCreateOrder =  Omit<IOrder, 'id'>
+
+// дженерик <IOrder[]>
+// interface - для описания типа объекта
+// Omit - позволяет исключать типы или свойства из другого типа
+
+
 function CreateOrder() {
-  const [formValues, setFormValues] = useState({});
-  const [orders, setOrders] = useState([]);
+  const [formValues, setFormValues] = useState<TCreateOrder>({ name: '', describe: '' });
+  const [orders, setOrders] = useState<IOrder[]>([]);
 
-  const inputRef = useRef(null)
+  const inputRef: any= useRef(null)
 
-  const handleDelete = (id) => {
-   const newOrders = orders.filter((order) => {
-      if (order.id === id) {
-        return false;
-      } else {
-        return true;
-      }
-    });
-    setOrders(newOrders)
+  const handleDelete = (id: number) => {
+      const newOrders: IOrder[] = orders.filter(order => {
+          if (order.id === id) {
+              return false;
+          } else {
+              return true;
+          }
+      });
+      setOrders(newOrders);
   };
 
   useEffect(() => {
     inputRef.current.focus()
   }, [])
 
-
-  useEffect(async () => {
-    const data = await (await axios.get('http://localhost:3001/posts')).data
-    setOrders(data)
-  }, [])
-
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // взять данные инпута
     setFormValues({ ...formValues, name: event.target.value });
-
-    // console.log(formValues);
   };
 
-  const handleChangeSecondary = (event) => {
+  const handleChangeSecondary = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     // взять данные инпута
     setFormValues({ ...formValues, describe: event.target.value });
-    // console.log(formValues);
   };
 
   const clearInput = () => {
@@ -51,7 +56,7 @@ function CreateOrder() {
   };
 
   const placeOrder = () => {
-    const newOrder = {
+    const newOrder: TCreateOrder = {
       name: formValues.name,
       describe: formValues.describe,
     };
@@ -61,14 +66,11 @@ function CreateOrder() {
       return;
     }
 
-    // вызывает баги
-    // setOrders([...orders, newOrder])
-
-    setOrders((prev) => {
-      return [...prev, newOrder];
+    axios.post('http://localhost:3001/posts', newOrder).then(data => {
+        setOrders(prev => {
+            return [...prev, data.data];
+        });
     });
-
-    axios.post('http://localhost:3001/posts', newOrder)
 
     clearInput();
   };
@@ -96,7 +98,6 @@ function CreateOrder() {
           Создать заказ
         </button>
       </div>
-      <Orders orders={orders} onDelete={handleDelete}/>
     </div>
   );
 }
