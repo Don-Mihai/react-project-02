@@ -6,9 +6,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { IOrder } from '../CreateOrder/CreateOrder';
 import axios from 'axios';
 
-
-
-
 function Orders() {
   const [search, setSearch] = useState<string>('');
   const [orders, setOrders] = useState<IOrder[]>([]);

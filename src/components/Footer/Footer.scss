@@ -16,6 +16,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 10px;
         }
 
     }
@@ -57,4 +58,36 @@
         gap: 14px;
         text-align: center;
     }
+}
+
+@media (max-width: 1300px) {
+    .footer {
+        font-size: 17px;
+
+        &__item {
+            &_icons {
+                margin-bottom: 25px;
+            }
+
+            &_media {
+                margin-top: 24px;
+                align-items: normal;
+                &-text {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 990px) {
+    .footer {
+        &__navigation {
+            display: none;
+        }
+
+    &__contacts {
+        flex-direction: column;
+    }
+}
 }
