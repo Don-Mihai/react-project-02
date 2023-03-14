@@ -6,6 +6,12 @@
     background-color: fff;
     color: #212336;
 
+
+    &__logo {
+        height: 70px;
+        width: 100px;
+    }
+
     &__navigation {
         display: flex;
         gap: 60px;
@@ -36,7 +42,10 @@
         width: 100px;
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 .hamburger-menu {
     display: none;
 }
@@ -137,6 +146,7 @@
     visibility: visible;
     right: 0;
 }
+<<<<<<< HEAD
 
 @media (max-width: 1300px) {
     .header {
@@ -153,11 +163,16 @@ gap: 15px;
 }
 }
 
+=======
+>>>>>>> main
 @media (max-width: 990px) {
     .hamburger-menu {
         display: block;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     .header__navigation {
         display: none;
     }

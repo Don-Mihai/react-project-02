@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
-import Orders from './pages/Order';
+import Order from './pages/Order';
 import CreateOrder from './pages/CreateOrder';
 
 
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/orders',
-        element: <Orders />,
+        element: <Order />,
     },
     // относится к заказу, поэтому перенести его
     {

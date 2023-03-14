@@ -12,7 +12,7 @@ function Orders() {
 
   // @ts-ignore
   useEffect(async () => {
-    const data = await (await axios.get('http://localhost:3001/posts')).data
+    const data: IOrder[] = await (await axios.get('http://localhost:3001/posts')).data
     setOrders(data)
   }, [])
 
