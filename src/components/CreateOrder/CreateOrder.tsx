@@ -34,9 +34,9 @@ function CreateOrder() {
       setOrders(newOrders);
   };
 
-  useEffect(() => {
-    inputRef.current.focus()
-  }, [])
+  // useEffect(() => {
+  //   inputRef.current.focus()
+  // }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // взять данные инпута

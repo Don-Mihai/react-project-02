@@ -5,6 +5,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home';
 import Order from './pages/Order';
 import CreateOrder from './pages/CreateOrder';
+import { Provider } from 'react-redux';
+import { store } from './redux/store'
 
 
 const router = createBrowserRouter([
@@ -26,4 +28,8 @@ const router = createBrowserRouter([
 // @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(<RouterProvider router={router} />);
+root.render(
+    <Provider store={store}>
+        <RouterProvider router={router} />
+    </Provider>
+);

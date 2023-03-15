@@ -4,15 +4,18 @@ import Header from "../components/Header/Header";
 import "./Home.scss";
 // import home_picture from "./home_picture.png";
 import Footer from "../components/Footer/Footer";
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 const Home = () => {
+  const count = useSelector((state: RootState) => state.counter.value)
   return (
     <div>
       <Header></Header>
       <div className="home__container">
         <div className="home__top">
           <div className="home__top_titles">
-            <h1 className="home__top_title">ФРИЛАНС БИРЖА</h1>
+            <h1 className="home__top_title">ФРИЛАНС БИРЖА {count}</h1>
             <h2 className="home__top_subtitle">
               для поиска нужных друг другу людей
             </h2>
