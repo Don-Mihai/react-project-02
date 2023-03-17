@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 // todo: описать интерфейс для пропсов [1]
 
-const Order = ({ object, index }: any) => {
+const Order = ({ object, index}: any) => {
 
     return (
         <div

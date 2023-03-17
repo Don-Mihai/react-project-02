@@ -5,8 +5,9 @@ import { IOrder } from '../CreateOrder/CreateOrder';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment } from '../../redux/counter/counter';
-import { RootState } from '../../redux/store';
+import { AppDispatch, RootState } from '../../redux/store';
 import Order from '../Order/Order';
+import { fetch } from '../../redux/order/order';
 
 function Orders() {
   const [search, setSearch] = useState<string>('');
@@ -14,13 +15,13 @@ function Orders() {
 
   const count = useSelector((state: RootState) => state.counter.value)
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<AppDispatch>()
 
   const fetchOrders = async () => {
-    const data = await axios.get('http://localhost:3001/posts')
-    const orders: IOrder[] = data.data
-    setOrders(orders)
-    return orders
+
+    dispatch(fetch())
+    // setOrders(orders)
+    // return orders
   }
 
   useEffect(() => {
