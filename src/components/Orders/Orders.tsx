@@ -1,13 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import "./Orders.scss";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { IOrder } from '../CreateOrder/CreateOrder';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment } from '../../redux/counter/counter';
 import { RootState } from '../../redux/store';
+import Order from '../Order/Order';
 
 function Orders() {
   const [search, setSearch] = useState<string>('');
@@ -17,11 +16,16 @@ function Orders() {
 
   const dispatch = useDispatch()
 
-  // @ts-ignore
-  // useEffect(async () => {
-  //   const data: IOrder[] = await (await axios.get('http://localhost:3001/posts')).data
-  //   setOrders(data)
-  // }, [])
+  const fetchOrders = async () => {
+    const data = await axios.get('http://localhost:3001/posts')
+    const orders: IOrder[] = data.data
+    setOrders(orders)
+    return orders
+  }
+
+  useEffect(() => {
+    fetchOrders()
+  }, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -42,7 +46,7 @@ function Orders() {
         {count}
         <button onClick={handleDecrement}>-</button>
       </h2>
-
+      {/* todo: подключить из materialUi searchField [1] */}
       <input onChange={handleChange} value={search} placeholder="Поиск..." />
       {orders
         ?.filter((object) => {
@@ -56,34 +60,7 @@ function Orders() {
         })
         .map((object, index) => {
           return (
-            <div
-              className="order-item"
-              key={index}
-              style={{ border: "1px solid red" }}
-            >
-              <div>
-                <div>{object?.name}</div>
-                <div>{object?.describe}</div>
-              </div>
-              <div className="order-item__details">
-                <p>Отклики</p>
-                <p>Просмотры</p>
-                <p>... дней назад</p>
-              </div>
-              <div className="order-item__price">
-                <div>Договорная</div>
-                <img></img>
-              </div>
-
-
-              <IconButton
-                onClick={() => console.log('del')}
-                aria-label="delete"
-                size="small"
-              >
-                <DeleteIcon fontSize="small" />
-              </IconButton>
-            </div>
+            <Order object={object} index={index}></Order>
           );
         })}
     </div>

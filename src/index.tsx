@@ -14,16 +14,21 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />,
     },
+    // todo: переименовать название и адрес в performer(для для исполнителя в переводе с англ), тоесть тсраничка с заказами [1]
     {
         path: '/orders',
         element: <Order />,
     },
-    // относится к заказу, поэтому перенести его
     {
         path: '/orders/create',
         element: <CreateOrder />,
     },
 ]);
+
+// todo: сделать роутинг страницы для заказчика(страница с услугами), фрилансеры, контакты [2]
+
+// todo: создать пустую страничку 'для заказчика' (услуги) [1]
+// todo: создать пустую страничку 'контакты' [1]
 
 // @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById('root'));

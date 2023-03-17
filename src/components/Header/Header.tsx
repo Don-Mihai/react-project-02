@@ -31,7 +31,7 @@ const Header = () => {
       </Link>
       <div className="hamburger-menu">
         <input id="menu__toggle" type="checkbox" />
-        <label className="menu__btn" for="menu__toggle">
+        <label className="menu__btn" htmlFor="menu__toggle">
           <span></span>
         </label>
         <ul className="menu__box">
@@ -47,6 +47,7 @@ const Header = () => {
           <Link to={"/orders/"} className="menu__item">
             Контакты
           </Link>
+          {/* todo: подключить из materialUi button для создания заказа, сделать переход по ссылки при клике [1] */}
           <Link to={"/orders/"} className="menu__item">
             Личный кабинет
           </Link>
