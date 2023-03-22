@@ -2,19 +2,13 @@ import React from 'react'
 import { useRef, useState } from "react";
 import "./CreateOrder.scss";
 import axios from 'axios';
+import { AppDispatch } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { create } from '../../redux/order/order';
+import { IOrder, TCreateOrder } from '../../redux/order/types';
 
 
-export interface IOrder {
-  id: number;
-  name: string;
-  describe: string;
-}
 
-type TCreateOrder =  Omit<IOrder, 'id'>
-
-// дженерик <IOrder[]>
-// interface - для описания типа объекта
-// Omit - позволяет исключать типы или свойства из другого типа
 
 
 function CreateOrder() {
@@ -23,17 +17,9 @@ function CreateOrder() {
 
   const inputRef: any= useRef(null)
 
+  const dispatch = useDispatch<AppDispatch>()
+
   // todo: перенести функцию в Orders и передать в качестве пропса в компонент Order [2]
-  const handleDelete = (id: number) => {
-      const newOrders: IOrder[] = orders.filter(order => {
-          if (order.id === id) {
-              return false;
-          } else {
-              return true;
-          }
-      });
-      setOrders(newOrders);
-  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     // взять данные инпута
@@ -66,12 +52,7 @@ function CreateOrder() {
       return;
     }
 
-    // todo: перенести получение постов в редакс [2]
-    axios.post('http://localhost:3001/posts', newOrder).then(data => {
-        setOrders(prev => {
-            return [...prev, data.data];
-        });
-    });
+    dispatch(create(newOrder))
 
     clearInput();
   };

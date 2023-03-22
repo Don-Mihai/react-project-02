@@ -1,11 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { OrderState, TCreateOrder } from './types';
 
-export interface OrderState {
-    orders: object[];
-    isLoading: boolean;
-}
+
 
 const initialState: OrderState = {
     orders: [],
@@ -13,11 +11,25 @@ const initialState: OrderState = {
 };
 
 
+// получает все заказы с бэка
 export const fetch = createAsyncThunk('order/fetch', async () => {
     const data = await axios.get('http://localhost:3001/posts');
     const orders = data.data
     return orders
 });
+
+// создает заказ
+export const create = createAsyncThunk('order/create', async (newOrder: TCreateOrder) => {
+    const data = await axios.post('http://localhost:3001/posts', newOrder)
+    const order = data.data
+    return order
+});
+
+// удаляет заказ
+export const remove = createAsyncThunk('order/remove', async (idOrder: number) => {
+    axios.delete(`http://localhost:3001/posts/${idOrder}`)
+});
+
 
 export const order = createSlice({
     name: 'order',
@@ -27,10 +39,8 @@ export const order = createSlice({
         builder
             .addCase(fetch.fulfilled, (state, action) => {
                 state.orders = action.payload;
-                console.log('payload', action.payload);
             })
             .addCase(fetch.pending, (state, action) => {
-                console.log('load');
                 state.isLoading = true;
             });
     },
