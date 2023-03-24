@@ -2,14 +2,40 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useState } from 'react';
 import { TCreateOrder } from '../../redux/order/types';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem/MenuItem';
+import React from 'react';
+import './Order.scss'
 
 // todo: описать интерфейс для пропсов [1]
 
 const Order = ({ object, index, onDelete, onEdit}: any) => {
   const [formValues, setFormValues] = useState<TCreateOrder>({ name: object.name, describe: object.describe });
   const [editMode, setEditMode] = useState<boolean>(false)
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const openOptions = Boolean(anchorEl);
+
+
+  const onClickEdit = () => {
+    setEditMode(!editMode)
+    handleClose()
+  }
+
+  const onClickDelete = () => {
+    onDelete(object.id)
+    handleClose()
+  }
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +49,8 @@ const Order = ({ object, index, onDelete, onEdit}: any) => {
   };
 
   const onClickSave = () => {
-    onEdit(formValues)
+
+    onEdit({...formValues, id: object.id})
     setEditMode(false)
   }
 
@@ -34,7 +61,7 @@ const Order = ({ object, index, onDelete, onEdit}: any) => {
                 <br />
                 {editMode ? <textarea name="describe" onChange={handleChangeSecondary} value={formValues?.describe}></textarea> : <div>{object?.describe}</div>}
             </div>
-            
+
             <div className="order-item__details">
                 <p>Отклики</p>
                 <p>Просмотры</p>
@@ -45,17 +72,44 @@ const Order = ({ object, index, onDelete, onEdit}: any) => {
                 {/* <img></img> */}
             </div>
 
-            <IconButton onClick={() => setEditMode(!editMode)} aria-label="delete" size="small">
-                <EditIcon fontSize="small" />
-            </IconButton>
+            {editMode && (
+                <IconButton onClick={onClickSave} aria-label="delete" size="small" sx={{position: 'absolute', top: '15px', right: '20px'}}>
+                    <SaveIcon fontSize="small" />
+                </IconButton>
+            )}
 
-            <IconButton onClick={onClickSave} aria-label="delete" size="small">
-                <SaveIcon fontSize="small" />
+            <IconButton
+                aria-label="more"
+                id="long-button"
+                aria-controls={openOptions ? 'long-menu' : undefined}
+                aria-expanded={openOptions ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+            >
+                <MoreVertIcon />
             </IconButton>
-
-            <IconButton onClick={() => onDelete(object.id)} aria-label="delete" size="small">
-                <DeleteIcon fontSize="small" />
-            </IconButton>
+            <Menu
+                id="long-menu"
+                MenuListProps={{
+                    'aria-labelledby': 'long-button',
+                }}
+                anchorEl={anchorEl}
+                open={openOptions}
+                onClose={handleClose}
+                PaperProps={{
+                    style: {
+                        maxHeight: 48 * 4.5,
+                        // width: '20ch',
+                    },
+                }}
+            >
+                <MenuItem key={'1'} onClick={onClickEdit}>
+                    <EditIcon fontSize="small" />
+                </MenuItem>
+                <MenuItem key={'2'} onClick={onClickDelete}>
+                    <DeleteIcon fontSize="small" />
+                </MenuItem>
+            </Menu>
         </div>
     );
 };

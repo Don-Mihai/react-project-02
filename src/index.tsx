@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Order from './pages/Order';
 import CreateOrder from './pages/CreateOrder';
+import Registration from './pages/Registration/Registration';
+import Authorization from './pages/Authorization/Authorization';
 import { Provider } from 'react-redux';
 import { store } from './redux/store'
 
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
     {
         path: '/orders/create',
         element: <CreateOrder />,
+    },
+    {
+        path: '/sign-up',
+        element: <Registration />,
+    },
+    {
+        path: '/sign-in',
+        element: <Authorization />,
     },
 ]);
 

@@ -1,19 +1,9 @@
 {
   "posts": [
     {
-      "name": "Драма",
-      "describe": "Описание фильма",
-      "id": 3
-    },
-    {
-      "name": "Михаил",
-      "describe": "qqqqqqqq",
+      "name": "Иван Грозный",
+      "describe": "ДЛинное описание",
       "id": 7
-    },
-    {
-      "name": "qq",
-      "describe": "qq",
-      "id": 8
     },
     {
       "name": "test",

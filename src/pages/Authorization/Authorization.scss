@@ -1,0 +1,27 @@
+.registration {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 400px;
+    min-height: 500px;
+
+    &__top {
+        margin-bottom: 20px;
+    }
+    
+
+    &__container {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        background-color: #e9f4f8;
+    }
+
+    &__inputs {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: 20px;
+    }
+}

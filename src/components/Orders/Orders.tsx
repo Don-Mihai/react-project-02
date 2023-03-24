@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment } from '../../redux/counter/counter';
 import { AppDispatch, RootState } from '../../redux/store';
 import Order from '../Order/Order';
-import { fetch, remove } from '../../redux/order/order';
+import { edit, fetch, remove } from '../../redux/order/order';
 import { IOrder, TCreateOrder } from '../../redux/order/types';
 
 function Orders() {
@@ -41,17 +41,17 @@ function Orders() {
     dispatch(remove(id))
 };
 
-const handleEdit = (payload: TCreateOrder) => {
+const handleEdit = async (payload: IOrder) => {
 
   // todo: вынести валидацию в отдельную функцию. на входе она должна принимать объект значений, если валидацию не проходит то должна появится всплывашка [3]
   // валидация на заполнение полей
   if (!payload?.describe?.length || !payload?.name?.length) {
     return;
   }
-
-  console.log('Запрос сработал', payload)
-
-  // dispatch(edit(payload))
+  
+  // Update из CRUD СИСТЕМЫ
+  await dispatch(edit(payload))
+  fetchOrders()
 };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,33 +66,29 @@ const handleEdit = (payload: TCreateOrder) => {
     dispatch(decrement())
   }
 
+  const filterOrders = (object: IOrder, search: string) => {
+    const name = object?.name?.toLowerCase();
+    const describe = object?.describe?.toLowerCase();
+    return (name && name.includes(search)) || (describe && describe.includes(search));
+  };
+
   return (
-    <div>
-      <h2>Заказы ({orders?.length})
-        <button onClick={handleIncrement}>+_+</button>
-        {count}
-        <button onClick={handleDecrement}>-</button>
-      </h2>
-      {/* todo: подключить из materialUi searchField [1] */}
-      {/* todo: скрывать поиск когда нет заказов [1] */}
-      <input onChange={handleChange} value={search} placeholder="Поиск..." />
-      {/* todo: когда нет заказов отобразить красивую надпись или картинку с инфомрацией о том что нет созданных заказов [2] */}
-      {orders
-        ?.filter((object) => {
-          // поиск по заказам
-          if (
-            object?.name.toUpperCase().includes(search.toUpperCase()) ||
-            object?.describe.toUpperCase().includes(search.toUpperCase())
-          ) {
-            return true;
-          } else return false;
-        })
-        .map((object, index) => {
-          return (
-            <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index}></Order>
-          );
-        })}
-    </div>
+      <div>
+          <h2>
+              Заказы ({orders?.length})<button onClick={handleIncrement}>+_+</button>
+              {count}
+              <button onClick={handleDecrement}>-</button>
+          </h2>
+          {/* todo: подключить из materialUi searchField [1] */}
+          {/* todo: скрывать поиск когда нет заказов [1] */}
+          <input onChange={handleChange} value={search} placeholder="Поиск..." />
+          {/* todo: когда нет заказов отобразить красивую надпись или картинку с инфомрацией о том что нет созданных заказов [2] */}
+          {orders
+              ?.filter(object => filterOrders(object, search))
+              .map((object, index) => (
+                  <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index} />
+              ))}
+      </div>
   );
 }
 

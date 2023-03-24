@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Header from "../components/Header/Header";
+import Header from "../../components/Header/Header";
 import "./Home.scss";
 // import home_picture from "./home_picture.png";
-import Footer from "../components/Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { RootState } from '../../redux/store';
 
 const Home = () => {
   const count = useSelector((state: RootState) => state.counter.value)
