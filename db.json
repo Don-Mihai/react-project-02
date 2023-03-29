@@ -16,8 +16,11 @@
       "id": 11
     }
   ],
-  "comments": [],
-  "profile": {
-    "name": "typicode"
-  }
+  "users": [
+    {
+      "login": "admin",
+      "password": "admin",
+      "id": 1
+    }
+  ]
 }

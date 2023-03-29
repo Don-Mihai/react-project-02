@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counter from './counter/counter'
+import order from './order/order';
+import user from './user/user';
 
 export const store = configureStore({
     reducer: {
         counter,
+        order,
+        user,
     },
 })
 
