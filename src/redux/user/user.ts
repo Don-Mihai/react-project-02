@@ -8,7 +8,7 @@ import isEqual from 'lodash/isEqual';
 
 const initialState: UserState = {
     users: [],
-    currentUser: {},
+    currentUser: {} as IUser,
 };
 
 const API_URL = 'http://localhost:3001'
@@ -35,6 +35,11 @@ export const auth = createAsyncThunk('user/authorization', async (currUser: IAut
     return result
 });
 
+export const edit = createAsyncThunk('user/edit', async (payload: IUser) => {
+    const response = await axios.put(`${API_URL}/users/${payload.id}`, payload);
+    return response.data;
+});
+
 
 
 
@@ -43,7 +48,13 @@ export const user = createSlice({
     initialState,
     reducers: {},
     extraReducers(builder) {
-        
+        builder.addCase(auth.fulfilled, (state, action) => {
+            state.currentUser = action.payload
+        }).addCase(registration.fulfilled, (state, action) => {
+            state.currentUser = action.payload
+        }).addCase(edit.fulfilled, (state, action) => {
+            state.currentUser = action.payload
+        })
     },
 });
 

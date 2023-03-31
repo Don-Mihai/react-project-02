@@ -35,7 +35,10 @@
     {
       "login": "admin",
       "password": "admin",
-      "id": 1
+      "name": "Михаил",
+      "surname": "Грозный",
+      "id": 1,
+      "": "Иванs"
     }
   ]
 }

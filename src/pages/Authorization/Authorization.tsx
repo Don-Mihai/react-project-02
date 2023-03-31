@@ -28,7 +28,7 @@ const Authorization = () => {
        const data = await dispatch(auth(payload))
 
        if(data.payload.id) {
-        navigate('/');
+        navigate('/my/profile');
        }
     }
 

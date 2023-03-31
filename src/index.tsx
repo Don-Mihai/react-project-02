@@ -9,6 +9,7 @@ import Registration from './pages/Registration/Registration';
 import Authorization from './pages/Authorization/Authorization';
 import { Provider } from 'react-redux';
 import { store } from './redux/store'
+import Profile from './pages/Profile/Profile';
 
 
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
     {
         path: '/sign-in',
         element: <Authorization />,
+    },
+    {
+        path: '/my/profile',
+        element: <Profile />,
     },
 ]);
 

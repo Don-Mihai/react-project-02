@@ -1,9 +1,11 @@
 export interface IUser {
     id: number;
-    login: string;
-    password: string;
+    login?: string;
+    password?: string;
     birthDate?: string;
     email?: string;
+    name?: string;
+    surname?: string;
   }
   
 export type TCreateUser =  Omit<IUser, 'id'>
@@ -15,5 +17,5 @@ export interface IAuthUser {
 
 export interface UserState {
     users: IUser[];
-    currentUser: object;
+    currentUser: IUser;
 }
