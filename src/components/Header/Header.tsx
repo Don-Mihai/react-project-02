@@ -23,12 +23,20 @@ const Header = () => {
           Контакты
         </Link>
       </div>
-      <Link
-        to={"/orders"}
-        className="header__navigation header__navigation_item-pers"
-      >
-        Личный кабинет
-      </Link>
+      <div className="header__block">
+        <div className="tooltip-on-hover">
+          <Link to={"orders/create"} className="header__block_button">
+            +
+          </Link>
+        </div>
+        <div className="tooltip">Создать заказ</div>
+        <Link
+          to={"/orders"}
+          className="header__navigation header__navigation_item-pers"
+        >
+          Личный кабинет
+        </Link>
+      </div>
       <div className="hamburger-menu">
         <input id="menu__toggle" type="checkbox" />
         <label className="menu__btn" htmlFor="menu__toggle">

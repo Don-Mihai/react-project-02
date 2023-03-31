@@ -7,6 +7,8 @@ import { AppDispatch, RootState } from '../../redux/store';
 import Order from '../Order/Order';
 import { edit, fetch, remove } from '../../redux/order/order';
 import { IOrder, TCreateOrder } from '../../redux/order/types';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 function Orders() {
   const [search, setSearch] = useState<string>('');
@@ -80,8 +82,18 @@ const handleEdit = async (payload: IOrder) => {
               <button onClick={handleDecrement}>-</button>
           </h2>
           {/* todo: подключить из materialUi searchField [1] */}
+          <Box
+      component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField className="orders__search_input" onChange={handleChange} value={search} id="standard-basic" label="Поиск..." variant="standard" color='warning'/>
+    </Box>
           {/* todo: скрывать поиск когда нет заказов [1] */}
-          <input onChange={handleChange} value={search} placeholder="Поиск..." />
+          {/* <input onChange={handleChange} value={search} placeholder="Поиск..." /> */}
           {/* todo: когда нет заказов отобразить красивую надпись или картинку с инфомрацией о том что нет созданных заказов [2] */}
           {orders
               ?.filter(object => filterOrders(object, search))
