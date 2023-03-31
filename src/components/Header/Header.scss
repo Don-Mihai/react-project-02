@@ -1,3 +1,13 @@
+@keyframes ani {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -34,14 +44,46 @@
             }
         }
     }
+    &__block {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        position: relative;
 
+        &_button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            border-radius: 100px;
+            font-family: "Montserrat", sans-serif;
+            background-color: #FAA342;
+            color: #fff;
+        }
 
-
-    &__logo {
-        height: 70px;
-        width: 100px;
     }
+
+    .tooltip {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: -36px;
+        width: 122px;
+        border: 1px solid #FAA342;
+        border-radius: 9px;
+        padding: 2px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .tooltip-on-hover:hover+.tooltip {
+        display: block;
+        animation: ani 1s forwards;
+    }
+
 }
+
 .hamburger-menu {
     display: none;
 }
@@ -146,27 +188,44 @@
 
 @media (max-width: 1300px) {
     .header {
-gap: 15px;
-    
-    &__navigation {
-        font-size: 17px;
         gap: 15px;
 
-        &_item {
-            font-size: 17px;  
+        &__navigation {
+            font-size: 17px;
+            gap: 15px;
+
+            &_item {
+                font-size: 17px;
+            }
+        }
+
+        &__block {
+            gap: 5px;
+
+            &_button {
+                width: 20px;
+                height: 20px;
+            }
         }
     }
-}
 }
 
 @media (max-width: 990px) {
     .hamburger-menu {
         display: block;
     }
-    .header__navigation {
-        display: none;
+
+    .header {
+        &__navigation {
+            display: none;
+        }
+
+            &__block_button {
+                display: none;
+            }
+        }
     }
-}
+
 @media (max-width: 555px) {
     .menu__btn {
         right: 25px;
