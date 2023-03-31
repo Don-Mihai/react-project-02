@@ -1,7 +1,21 @@
+.orders {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
 .order-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  width: 100%;
 
   margin: 0 auto;
   padding: 10px 15px;

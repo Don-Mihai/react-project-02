@@ -12,5 +12,5 @@ export type TCreateOrder =  Omit<IOrder, 'id'>
 
 export interface OrderState {
     orders: object[];
-    isLoading: boolean;
+    isLoadingFetch: boolean;
 }

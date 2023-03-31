@@ -7,7 +7,7 @@ import { IOrder, OrderState, TCreateOrder } from './types';
 
 const initialState: OrderState = {
     orders: [],
-    isLoading: false
+    isLoadingFetch: false
 };
 
 const API_URL = 'http://localhost:3001'
@@ -47,10 +47,12 @@ export const order = createSlice({
         builder
             .addCase(fetch.fulfilled, (state, action) => {
                 state.orders = action.payload;
+                state.isLoadingFetch = false;
             })
             .addCase(fetch.pending, (state, action) => {
-                state.isLoading = true;
-            });
+                state.isLoadingFetch = true;
+            })
+            
     },
 });
 
