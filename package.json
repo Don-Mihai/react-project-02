@@ -31,7 +31,8 @@
     "json": "json-server --watch db.json --port 3001",
     "json mac": "npx json-server --watch db.json --port 3001",
     "build": "react-scripts build",
-    "prettier": "prettier --write --config ./prettier.config.js"
+    "prettier": "prettier --write --config ./prettier.config.js",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +53,14 @@
     ]
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.192"
+    "@types/lodash": "^4.14.192",
+    "eslint": "^8.37.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
+    "prettier": "^2.8.7"
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix",
+    "*.{js,css,scss,md,ts,tsx}": "prettier --write"
   }
 }

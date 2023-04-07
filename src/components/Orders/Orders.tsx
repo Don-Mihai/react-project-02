@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from "react";
-import "./Orders.scss";
+import { useState, useEffect } from 'react';
+import './Orders.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import Order from '../Order/Order';
@@ -12,7 +12,6 @@ import Skeleton from './Skeleton';
 import CircularProgress from '@mui/material/CircularProgress';
 
 function Orders() {
-  
     const [search, setSearch] = useState<string>('');
     const [orders, setOrders] = useState<IOrder[]>([]);
 
@@ -22,7 +21,7 @@ function Orders() {
 
     const fetchOrders = () => {
         // READ - ЭЛЕМЕНТ CRUD системы
-        dispatch(fetch()).then(data => setOrders(data.payload))
+        dispatch(fetch()).then(data => setOrders(data.payload));
     };
 
     useEffect(() => {
@@ -70,9 +69,7 @@ function Orders() {
 
     return (
         <div className={'orders'}>
-            <h2>
-                Заказы
-            </h2>
+            <h2>Заказы</h2>
             {/* todo: подключить из materialUi searchField [1] */}
             <Box
                 component="form"
@@ -95,11 +92,15 @@ function Orders() {
             {/* todo: скрывать поиск когда нет заказов [1] */}
             {/* <input onChange={handleChange} value={search} placeholder="Поиск..." /> */}
             {/* todo: когда нет заказов отобразить красивую надпись или картинку с инфомрацией о том что нет созданных заказов [2] */}
-            {isLoadingOrders
-                ? <div className={'progress'}><CircularProgress size={70} /></div>
-                : orders
-                      ?.filter(object => filterOrders(object, search))
-                      .map((object, index) => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index} />)}
+            {isLoadingOrders ? (
+                <div className={'progress'}>
+                    <CircularProgress size={70} />
+                </div>
+            ) : (
+                orders
+                    ?.filter(object => filterOrders(object, search))
+                    .map((object, index) => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index} />)
+            )}
         </div>
     );
 }

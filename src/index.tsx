@@ -8,9 +8,9 @@ import CreateOrder from './pages/CreateOrder';
 import Registration from './pages/Registration/Registration';
 import Authorization from './pages/Authorization/Authorization';
 import { Provider } from 'react-redux';
-import { store } from './redux/store'
+import { store } from './redux/store';
 import Profile from './pages/Profile/Profile';
-
+import ProfileOrders from './pages/ProfileOrders/ProfileOrders';
 
 const router = createBrowserRouter([
     {
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
     {
         path: '/my/profile',
         element: <Profile />,
+    },
+    {
+        path: '/my/orders',
+        element: <ProfileOrders />,
     },
 ]);
 

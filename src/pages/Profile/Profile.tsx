@@ -1,11 +1,11 @@
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppDispatch, RootState } from '../../redux/store';
 import { IUser, TCreateUser } from '../../redux/user/types';
-import { edit, registration } from '../../redux/user/user';
+import { edit, getUserById, registration } from '../../redux/user/user';
 import './Profile.scss';
 import Header from '../../components/Header/Header';
 import Avatar from '@mui/material/Avatar';
@@ -13,28 +13,33 @@ import { deepOrange } from '@mui/material/colors';
 
 const Profile = () => {
     const user = useSelector((state: RootState) => state.user.currentUser);
-    const [formValues, setFormValues] = useState<TCreateUser>({name: user.name, surname: user.surname})
+    const [formValues, setFormValues] = useState<TCreateUser>({ name: '', surname: '' });
 
-    const dispatch = useDispatch<AppDispatch>()
-    
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        dispatch(getUserById(Number(localStorage.getItem('id')))).then(data => {
+            setFormValues({ name: data.payload.name, surname: data.payload.surname });
+        });
+    }, []);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFormValues({...formValues, [event.target.name]: event.target.value})
-    }
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
+    };
 
     const handleEdit = async () => {
-
         const payload: IUser = {
             ...user,
             ...formValues,
-        }
-        
+        };
+
         if (!formValues.name?.length || !formValues?.surname?.length) {
             return;
         }
 
         await dispatch(edit(payload));
     };
+
     return (
         <>
             <Header></Header>
@@ -52,19 +57,19 @@ const Profile = () => {
                 </div>
 
                 <div className={'profile__content'}>
-                    <TextField value={formValues.name} onChange={handleChange} name='name' label="Имя*" variant="filled" fullWidth />
-                    <TextField value={formValues.surname} onChange={handleChange} name='surname'  label="Фамилия*" variant="filled" fullWidth />
+                    <TextField value={formValues.name} onChange={handleChange} name="name" label="Имя*" variant="filled" fullWidth />
+                    <TextField value={formValues.surname} onChange={handleChange} name="surname" label="Фамилия*" variant="filled" fullWidth />
                 </div>
 
                 <div className={'profile__footer'}>
-                    <Button variant="contained" >Отменить</Button>
-                    <Button onClick={handleEdit} variant="contained">Сохранить</Button>
+                    <Button variant="contained">Отменить</Button>
+                    <Button onClick={handleEdit} variant="contained">
+                        Сохранить
+                    </Button>
                 </div>
             </div>
         </>
     );
-        
-   
 };
 
 export default Profile;

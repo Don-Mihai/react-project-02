@@ -6,32 +6,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppDispatch } from '../../redux/store';
 import { IAuthUser } from '../../redux/user/types';
 import { auth } from '../../redux/user/user';
-import './Authorization.scss'
+import './Authorization.scss';
 
 const Authorization = () => {
-    const [formValues, setFormValues] = useState<IAuthUser>({login: '', password: ''})
+    const [formValues, setFormValues] = useState<IAuthUser>({ login: '', password: '' });
 
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFormValues({...formValues, [event.target.name]: event.target.value})
-    }
-
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
+    };
 
     const handleSubmit = async () => {
         const payload: IAuthUser = {
             login: formValues.login,
-            password: formValues.password
+            password: formValues.password,
+        };
+
+        const data = await dispatch(auth(payload));
+
+        if (data.payload.id) {
+            navigate('/my/profile');
+
+            localStorage.setItem('id', data.payload.id);
         }
-
-       const data = await dispatch(auth(payload))
-
-       if(data.payload.id) {
-        navigate('/my/profile');
-       }
-    }
-
+    };
 
     return (
         <div className="registration">
@@ -46,11 +46,12 @@ const Authorization = () => {
                     <TextField onChange={handleChange} value={formValues.password} name={'password'} label="Пароль" variant="outlined" fullWidth />
                 </div>
 
-                
-                <Button onClick={handleSubmit} variant="contained" fullWidth>Войти</Button>
+                <Button onClick={handleSubmit} variant="contained" fullWidth>
+                    Войти
+                </Button>
             </div>
         </div>
     );
-}
+};
 
 export default Authorization;
