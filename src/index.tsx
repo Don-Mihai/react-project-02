@@ -49,6 +49,8 @@ const router = createBrowserRouter([
 // todo: создать пустую страничку 'для заказчика' (услуги) [1]
 // todo: создать пустую страничку 'контакты' [1]
 
+// example
+
 // @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
