@@ -11,7 +11,11 @@ import TextField from '@mui/material/TextField';
 import Skeleton from './Skeleton';
 import CircularProgress from '@mui/material/CircularProgress';
 
-function Orders() {
+interface Props {
+    className?: string;
+}
+
+function Orders({ className }: Props) {
     const [search, setSearch] = useState<string>('');
     const [orders, setOrders] = useState<IOrder[]>([]);
 
@@ -68,7 +72,7 @@ function Orders() {
     const arr = [1, 2, 3, 4, 5, 6, 7];
 
     return (
-        <div className={'orders'}>
+        <div className={`orders ${className}`}>
             <h2>Заказы</h2>
             {/* todo: подключить из materialUi searchField [1] */}
             <Box

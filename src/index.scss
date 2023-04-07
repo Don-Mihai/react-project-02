@@ -1,11 +1,11 @@
 body {
-  /* сброс стилей */
-  margin: 0;
-  margin: 0 auto;
-  padding: 20px 75px 0 75px;
-  font-family: "Montserrat", sans-serif;
-  background-color: #fff;
-  color: #212336;
+    /* сброс стилей */
+    margin: 0;
+    margin: 0 auto;
+    padding: 20px 75px 0 75px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    color: #212336;
 }
 
 h1,
@@ -14,14 +14,14 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
+    margin: 0;
 }
 
 a {
-  text-decoration: none;
-  color: #212336;
+    text-decoration: none;
+    color: #212336;
 }
 
 * {
-  box-sizing: -box;
+    box-sizing: border-box;
 }

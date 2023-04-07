@@ -1,0 +1,25 @@
+.filters {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    min-height: 500px;
+    background-color: #e9f4f8;
+    padding: 10px;
+
+    &__title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    &__chekboxes {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+}

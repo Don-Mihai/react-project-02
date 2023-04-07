@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './pages/Home/Home';
-import Order from './pages/Order';
+import Order from './pages/Orders/Order';
 import CreateOrder from './pages/CreateOrder';
 import Registration from './pages/Registration/Registration';
 import Authorization from './pages/Authorization/Authorization';
