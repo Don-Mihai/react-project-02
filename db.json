@@ -4,7 +4,8 @@
       "userId": 1,
       "name": "Создать нейросеть",
       "describe": "Описание",
-      "id": 17
+      "id": 17,
+      "filters": []
     },
     {
       "userId": 2,

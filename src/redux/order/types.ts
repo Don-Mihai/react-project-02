@@ -13,8 +13,14 @@ export type FormValuesOrder = Omit<IOrder, 'id' | 'userId'>;
 // interface - для описания типа объекта
 // Omit - позволяет исключать типы или свойства из другого типа
 
+export interface FilterOrders {
+    dev: boolean;
+    test: boolean;
+    design: boolean;
+}
 export interface OrderState {
     orders: IOrder[];
     myOrders: IOrder[];
+    filterOrders: FilterOrders;
     isLoadingFetch: boolean;
 }

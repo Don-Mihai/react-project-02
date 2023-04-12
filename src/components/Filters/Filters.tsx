@@ -9,33 +9,31 @@ import { registration } from '../../redux/user/user';
 import './Filters.scss';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-
-interface FormValues {
-    dev: boolean;
-    test: boolean;
-    design: boolean;
-}
+import { forIn } from 'lodash';
+import { FilterOrders } from '../../redux/order/types';
+import { setFilter } from '../../redux/order/order';
 
 const Filters = () => {
-    const [formValues, setFormValues] = useState<FormValues>({ dev: false, test: false, design: false });
+    const [formValues, setFormValues] = useState<FilterOrders>({ dev: true, test: false, design: false });
 
-    // const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFormValues({ ...formValues, [event.target.name]: event.target.checked });
     };
 
-    const resetCheboxes = () => {};
+    const resetCheboxes = () => {
+        const obj = { ...formValues };
+
+        for (let key in obj) {
+            obj[key as keyof FilterOrders] = false;
+        }
+
+        setFormValues(obj);
+    };
 
     const handleSubmit = () => {
-        // const payload: TCreateUser = {
-        //     login: formValues.login,
-        //     password: formValues.password
-        // }
-
-        // dispatch(registration(payload))
-
-        console.log(formValues);
+        dispatch(setFilter(formValues));
     };
 
     return (
@@ -43,16 +41,18 @@ const Filters = () => {
             <h2 className="filters__title">Сфера деятельности</h2>
 
             <div className="filters__chekboxes">
-                <FormControlLabel control={<Checkbox name="dev" onChange={handleChange} />} label="Разработка" />
-                <FormControlLabel control={<Checkbox name="test" onChange={handleChange} />} label="Тестирование" />
-                <FormControlLabel control={<Checkbox name="design" onChange={handleChange} />} label="Дизайн" />
+                <FormControlLabel control={<Checkbox name="dev" onChange={handleChange} checked={formValues.dev} />} label="Разработка" />
+                <FormControlLabel control={<Checkbox name="test" onChange={handleChange} checked={formValues.test} />} label="Тестирование" />
+                <FormControlLabel control={<Checkbox name="design" onChange={handleChange} checked={formValues.design} />} label="Дизайн" />
             </div>
 
             <div className="filters__footer">
                 <Button variant="contained" onClick={handleSubmit}>
                     Сохранить
                 </Button>
-                <Button variant="outlined">Очистить</Button>
+                <Button variant="outlined" onClick={resetCheboxes}>
+                    Очистить
+                </Button>
             </div>
         </div>
     );

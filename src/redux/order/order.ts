@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IOrder, OrderState, TCreateOrder } from './types';
+import { FilterOrders, IOrder, OrderState, TCreateOrder } from './types';
 
 const initialState: OrderState = {
     orders: [],
     myOrders: [],
+    filterOrders: {} as FilterOrders,
     isLoadingFetch: false,
 };
 
@@ -44,7 +44,11 @@ export const edit = createAsyncThunk('order/edit', async (payload: IOrder) => {
 export const order = createSlice({
     name: 'order',
     initialState,
-    reducers: {},
+    reducers: {
+        setFilter: (state, action) => {
+            state.filterOrders = action.payload;
+        },
+    },
     extraReducers(builder) {
         builder
             .addCase(fetch.fulfilled, (state, action) => {
@@ -60,6 +64,6 @@ export const order = createSlice({
     },
 });
 
-export const {} = order.actions;
+export const { setFilter } = order.actions;
 
 export default order.reducer;

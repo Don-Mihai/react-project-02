@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Skeleton from './Skeleton';
 import CircularProgress from '@mui/material/CircularProgress';
+import isEqual from 'lodash/isEqual';
 
 interface Props {
     className?: string;
@@ -18,6 +19,7 @@ interface Props {
 function Orders({ className }: Props) {
     const [search, setSearch] = useState<string>('');
     const [orders, setOrders] = useState<IOrder[]>([]);
+    const filters = useSelector((state: RootState) => state.order.filterOrders);
 
     const isLoadingOrders = useSelector((state: RootState) => state.order.isLoadingFetch);
 
@@ -103,6 +105,7 @@ function Orders({ className }: Props) {
             ) : (
                 orders
                     ?.filter(object => filterOrders(object, search))
+                    // ?.filter(object => isEqual(object.filters, getArrFromObjByTrue(filters)))
                     .map((object, index) => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index} />)
             )}
         </div>
