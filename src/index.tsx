@@ -6,11 +6,12 @@ import Home from './pages/Home/Home';
 import Order from './pages/Orders/Order';
 import CreateOrder from './pages/CreateOrder';
 import Registration from './pages/Registration/Registration';
-import Authorization from './pages/Authorization/Authorization';
+import Developers from './pages/Developers/Developers';
+import Authorization from './pages/Authorization';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import Profile from './pages/Profile/Profile';
-import ProfileOrders from './pages/ProfileOrders/ProfileOrders';
+import Profile from './pages/Profile';
+import ProfileOrders from './pages/ProfileOrders';
 
 const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
     {
         path: '/orders/create',
         element: <CreateOrder />,
+    },
+    {
+        path: '/developers',
+        element: <Developers />,
     },
     {
         path: '/sign-up',

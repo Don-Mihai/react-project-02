@@ -54,6 +54,7 @@
     {
       "login": "admin2",
       "password": "admin2",
+      "name": "Маск",
       "id": 2
     }
   ]

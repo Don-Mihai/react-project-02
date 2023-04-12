@@ -1,0 +1,11 @@
+.page-module {
+    &__body {
+        display: flex;
+        gap: 20px;
+        // width: 100%;
+    }
+
+    &__orders {
+        width: 100%;
+    }
+}

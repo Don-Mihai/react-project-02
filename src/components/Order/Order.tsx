@@ -20,6 +20,7 @@ const Order = ({ object, index, onDelete, onEdit }: any) => {
     const [formValues, setFormValues] = useState<FormValuesOrder>({
         name: object.name,
         describe: object.describe,
+        filter: object.filter,
     });
     const [editMode, setEditMode] = useState<boolean>(false);
 
