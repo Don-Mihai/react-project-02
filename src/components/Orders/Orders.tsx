@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import Order from '../Order/Order';
 import { edit, fetch, remove } from '../../redux/order/order';
-import { IOrder, TCreateOrder } from '../../redux/order/types';
+import { IOrder, TCreateOrder, TYPE_FILTERS } from '../../redux/order/types';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Skeleton from './Skeleton';
 import CircularProgress from '@mui/material/CircularProgress';
 import isEqual from 'lodash/isEqual';
+import { getArrFromObjByTrue } from '../../utils/object';
 
 interface Props {
     className?: string;
@@ -72,7 +73,7 @@ function Orders({ className }: Props) {
     };
 
     const arr = [1, 2, 3, 4, 5, 6, 7];
-
+    console.log(filters, orders);
     return (
         <div className={`orders ${className}`}>
             <h2>Заказы</h2>
@@ -104,8 +105,8 @@ function Orders({ className }: Props) {
                 </div>
             ) : (
                 orders
+                    ?.filter(order => getArrFromObjByTrue(filters).includes(order.filter) || getArrFromObjByTrue(filters).includes(TYPE_FILTERS.All))
                     ?.filter(object => filterOrders(object, search))
-                    // ?.filter(object => isEqual(object.filters, getArrFromObjByTrue(filters)))
                     .map((object, index) => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index} />)
             )}
         </div>

@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { FilterOrders, IOrder, OrderState, TCreateOrder } from './types';
+import { FilterOrders, IOrder, OrderState, TCreateOrder, TYPE_FILTERS, default_filter_obj } from './types';
 
 const initialState: OrderState = {
     orders: [],
     myOrders: [],
-    filterOrders: {} as FilterOrders,
+    filterOrders: default_filter_obj,
     isLoadingFetch: false,
 };
 

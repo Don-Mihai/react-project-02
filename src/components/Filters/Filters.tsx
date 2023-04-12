@@ -10,11 +10,11 @@ import './Filters.scss';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { forIn } from 'lodash';
-import { FilterOrders } from '../../redux/order/types';
+import { FilterOrders, TYPE_FILTERS, default_filter_obj } from '../../redux/order/types';
 import { setFilter } from '../../redux/order/order';
 
 const Filters = () => {
-    const [formValues, setFormValues] = useState<FilterOrders>({ dev: true, test: false, design: false });
+    const [formValues, setFormValues] = useState<FilterOrders>(default_filter_obj);
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -36,14 +36,26 @@ const Filters = () => {
         dispatch(setFilter(formValues));
     };
 
+    console.log(formValues);
+
     return (
         <div className="filters">
             <h2 className="filters__title">Сфера деятельности</h2>
 
             <div className="filters__chekboxes">
-                <FormControlLabel control={<Checkbox name="dev" onChange={handleChange} checked={formValues.dev} />} label="Разработка" />
-                <FormControlLabel control={<Checkbox name="test" onChange={handleChange} checked={formValues.test} />} label="Тестирование" />
-                <FormControlLabel control={<Checkbox name="design" onChange={handleChange} checked={formValues.design} />} label="Дизайн" />
+                <FormControlLabel control={<Checkbox name={TYPE_FILTERS.All} onChange={handleChange} checked={formValues[TYPE_FILTERS.All]} />} label="Все" />
+                <FormControlLabel
+                    control={<Checkbox name={TYPE_FILTERS.DEV} onChange={handleChange} checked={formValues[TYPE_FILTERS.DEV]} />}
+                    label="Разработка"
+                />
+                <FormControlLabel
+                    control={<Checkbox name={TYPE_FILTERS.TEST} onChange={handleChange} checked={formValues[TYPE_FILTERS.TEST]} />}
+                    label="Тестирование"
+                />
+                <FormControlLabel
+                    control={<Checkbox name={TYPE_FILTERS.DESIGN} onChange={handleChange} checked={formValues[TYPE_FILTERS.DESIGN]} />}
+                    label="Дизайн"
+                />
             </div>
 
             <div className="filters__footer">
