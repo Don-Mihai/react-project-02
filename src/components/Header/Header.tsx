@@ -29,7 +29,7 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className="tooltip">Создать заказ</div>
-                <Link to={'/orders'} className="header__navigation header__navigation_item-pers">
+                <Link to={'/my/profile'} className="header__navigation header__navigation_item-pers">
                     Личный кабинет
                 </Link>
             </div>
@@ -51,8 +51,7 @@ const Header = () => {
                     <Link to={'/orders/'} className="menu__item">
                         Контакты
                     </Link>
-                    {/* todo: подключить из materialUi button для создания заказа, сделать переход по ссылки при клике [1] */}
-                    <Link to={'/orders/'} className="menu__item">
+                    <Link to={'/my/profile'} className="menu__item">
                         Личный кабинет
                     </Link>
                 </ul>

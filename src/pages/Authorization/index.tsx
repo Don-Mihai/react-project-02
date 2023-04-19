@@ -34,14 +34,14 @@ const Authorization = () => {
     };
 
     return (
-        <div className="registration">
-            <div className="registration__top">
+        <div className="authorization">
+            <div className="authorization__top">
                 Ещё нет аккаунта?
                 <Link to={'/sign-up'}>Зарегистрируйтесь</Link>
             </div>
 
-            <div className="registration__container">
-                <div className="registration__inputs">
+            <div className="authorization__container">
+                <div className="authorization__inputs">
                     <TextField onChange={handleChange} value={formValues.login} name={'login'} label="Логин" variant="outlined" fullWidth />
                     <TextField onChange={handleChange} value={formValues.password} name={'password'} label="Пароль" variant="outlined" fullWidth />
                 </div>

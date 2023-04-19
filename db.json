@@ -49,13 +49,47 @@
       "password": "admin",
       "name": "Михаил",
       "surname": "Грозный",
-      "id": 1
+      "id": 1,
+      "imgUrl": "https://upload.wikimedia.org/wikipedia/ru/3/31/Winniethepooh.jpg",
+      "themeUrl": "https://cdn.shazoo.ru/480558_gQyZCSAujy_darkwing.jpg"
     },
     {
       "login": "admin2",
       "password": "admin2",
       "name": "Маск",
-      "id": 2
+      "id": 2,
+      "surname": "Илон",
+      "userDescribe": "Четыре татушки три тата"
+    },
+    {
+      "login": "qwerty",
+      "password": "qwerty",
+      "id": 3,
+      "name": "Наполеон",
+      "surname": "Бошнапарт"
+    },
+    {
+      "login": "test",
+      "password": "test",
+      "id": 4,
+      "name": "Фень сунь",
+      "surname": "Кай"
+    },
+    {
+      "login": "test2",
+      "password": "test2",
+      "id": 5,
+      "name": "Рузвельт",
+      "surname": "Теодор"
+    },
+    {
+      "login": "test3",
+      "password": "test3",
+      "name": "Моисей",
+      "surname": "Водный",
+      "skills": ["JS", "React", "Rest API", "Кросбраузерность"],
+      "id": 6,
+      "imgUrl": "https://avatars.dzeninfra.ru/get-zen_doc/4524946/pub_606c07f2b15d725cb2cba217_606c3c284ae18415ba6d3ed9/scale_1200"
     }
   ]
 }

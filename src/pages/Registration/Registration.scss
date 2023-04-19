@@ -8,14 +8,20 @@
     &__top {
         margin-bottom: 20px;
     }
-    
+
+    &__title {
+        margin-bottom: 15px;
+        font-size: 20px;
+        color: #faa342;
+    }
 
     &__container {
         padding: 10px;
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        background-color: #e9f4f8;
+        background-color: #fff;
+        box-shadow: 5px 5px 5px 5px #9b9a9a;
     }
 
     &__inputs {

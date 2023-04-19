@@ -4,12 +4,14 @@
     max-width: 766px;
     width: 100%;
     height: 700px;
-    box-shadow: 0.3em 0.3em 1em rgba(0,0,0,0.3);
+    box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 
     &__top-container {
         height: 200px;
         padding: 20px;
         background-color: #8be2fa;
+        background-size: cover;
+        background-position: center;
     }
 
     &__avatar-container {
@@ -26,10 +28,13 @@
         padding: 20px;
     }
 
+    &__subtitle {
+        margin-bottom: 10px;
+    }
+
     &__footer {
         display: flex;
         gap: 20px;
         padding: 20px;
     }
-          
 }

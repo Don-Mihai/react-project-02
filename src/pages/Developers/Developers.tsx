@@ -6,10 +6,10 @@ import UserCard from '../../components/UserCard';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useEffect } from 'react';
-import { getUserById } from '../../redux/user/user';
+import { getUserById, getUsers } from '../../redux/user/user';
 
 const Developers = () => {
-    const user = useSelector((state: RootState) => state.user.currentUser);
+    const users = useSelector((state: RootState) => state.user.users);
 
     const dispatch = useDispatch<AppDispatch>();
 
@@ -17,12 +17,21 @@ const Developers = () => {
         dispatch(getUserById(Number(localStorage.getItem('id'))));
     }, []);
 
+    useEffect(() => {
+        dispatch(getUsers());
+    }, []);
+
     return (
         <div className="page-module">
             <Header></Header>
             <div className="page-module__body">
-                Фрилансеры
-                <UserCard user={user}></UserCard>
+                <div className="page-module__container">
+                    <h2 className="page-module__title">Фрилансеры</h2>
+                    {users.map(user => (
+                        <UserCard user={user}></UserCard>
+                    ))}
+                </div>
+
                 <Filters></Filters>
             </div>
         </div>

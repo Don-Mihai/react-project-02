@@ -16,6 +16,11 @@ export const getUserById = createAsyncThunk('user/getUserById', async (idUser: n
     return response.data;
 });
 
+export const getUsers = createAsyncThunk('user/getUsers', async () => {
+    const response = await axios.get(`${API_URL}/users`);
+    return response.data;
+});
+
 // регистрирует пользователя
 export const registration = createAsyncThunk('user/registration', async (newUser: TCreateUser) => {
     const data = await axios.post(`${API_URL}/users`, newUser);
@@ -63,6 +68,9 @@ export const user = createSlice({
             })
             .addCase(getUserById.fulfilled, (state, action) => {
                 state.currentUser = action.payload;
+            })
+            .addCase(getUsers.fulfilled, (state, action) => {
+                state.users = action.payload;
             });
     },
 });
