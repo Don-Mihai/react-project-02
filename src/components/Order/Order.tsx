@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormValuesOrder } from '../../redux/order/types';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
@@ -13,10 +13,16 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import React from 'react';
 import './Order.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../redux/store';
+import { edit, getUserById, registration } from '../../redux/user/user';
+import { ROLES } from '../../redux/user/types';
+import { create } from '../../redux/bookmark/bookmark';
+import { TCreateBookmark } from '../../redux/bookmark/types';
 
 // todo: описать интерфейс для пропсов [1]
 
-const Order = ({ object, index, onDelete, onEdit }: any) => {
+const Order = ({ object, onDelete, onEdit }: any) => {
     const [formValues, setFormValues] = useState<FormValuesOrder>({
         name: object.name,
         describe: object.describe,
@@ -27,6 +33,17 @@ const Order = ({ object, index, onDelete, onEdit }: any) => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const openOptions = Boolean(anchorEl);
 
+    const user = useSelector((state: RootState) => state.user.currentUser);
+    const isMyOrder = user.id === object.userId;
+
+    const dispatch = useDispatch<AppDispatch>();
+
+    useEffect(() => {
+        dispatch(getUserById(Number(localStorage.getItem('id')))).then(data => {
+            // setFormValues({ name: data.payload.name});
+        });
+    }, []);
+
     const onClickEdit = () => {
         setEditMode(!editMode);
         handleClose();
@@ -35,6 +52,14 @@ const Order = ({ object, index, onDelete, onEdit }: any) => {
     const onClickDelete = () => {
         onDelete(object.id);
         handleClose();
+    };
+
+    const onClickAddBookmarks = () => {
+        const payload: TCreateBookmark = {
+            userId: user.id,
+            orderId: object.id,
+        };
+        dispatch(create(payload));
     };
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -108,28 +133,40 @@ const Order = ({ object, index, onDelete, onEdit }: any) => {
             >
                 <MoreVertIcon />
             </IconButton>
-            <Menu
-                id="long-menu"
-                MenuListProps={{
-                    'aria-labelledby': 'long-button',
-                }}
-                anchorEl={anchorEl}
-                open={openOptions}
-                onClose={handleClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: 48 * 4.5,
-                        // width: '20ch',
-                    },
-                }}
-            >
-                <MenuItem key={'1'} onClick={onClickEdit}>
-                    <EditIcon fontSize="small" />
-                </MenuItem>
-                <MenuItem key={'2'} onClick={onClickDelete}>
-                    <DeleteIcon fontSize="small" />
-                </MenuItem>
-            </Menu>
+            {
+                <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                        'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={openOptions}
+                    onClose={handleClose}
+                    PaperProps={{
+                        style: {
+                            maxHeight: 48 * 4.5,
+                            // width: '20ch',
+                        },
+                    }}
+                >
+                    {isMyOrder && (
+                        <MenuItem key={'1'} onClick={onClickEdit}>
+                            <EditIcon fontSize="small" />
+                        </MenuItem>
+                    )}
+                    {isMyOrder && (
+                        <MenuItem key={'2'} onClick={onClickDelete}>
+                            <DeleteIcon fontSize="small" />
+                        </MenuItem>
+                    )}
+
+                    {!isMyOrder && user.activeRole === ROLES.DEVELOPER && (
+                        <MenuItem key={'3'} onClick={onClickAddBookmarks}>
+                            Добавить в закладки
+                        </MenuItem>
+                    )}
+                </Menu>
+            }
         </div>
     );
 };

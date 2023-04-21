@@ -10,6 +10,13 @@ export interface IUser {
     imgUrl?: string;
     themeUrl?: string;
     skills?: string[];
+    activeRole?: ROLES | string;
+}
+
+export enum ROLES {
+    ADMIN = 'ADMIN',
+    DEVELOPER = 'DEVELOPER',
+    CUSTUMER = 'CUSTUMER',
 }
 
 export type TCreateUser = Omit<IUser, 'id'>;
