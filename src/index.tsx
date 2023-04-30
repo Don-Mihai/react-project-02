@@ -11,7 +11,6 @@ import Authorization from './pages/Authorization';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Profile from './pages/Profile';
-import ProfileOrders from './pages/ProfileOrders';
 
 const router = createBrowserRouter([
     {
@@ -43,18 +42,7 @@ const router = createBrowserRouter([
         path: '/my/profile',
         element: <Profile />,
     },
-    {
-        path: '/my/orders',
-        element: <ProfileOrders />,
-    },
 ]);
-
-// todo: сделать роутинг страницы для заказчика(страница с услугами), фрилансеры, контакты [2]
-
-// todo: создать пустую страничку 'для заказчика' (услуги) [1]
-// todo: создать пустую страничку 'контакты' [1]
-
-// example
 
 // @ts-ignore
 const root = ReactDOM.createRoot(document.getElementById('root'));

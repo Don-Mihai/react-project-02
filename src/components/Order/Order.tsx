@@ -1,41 +1,40 @@
-import IconButton from '@mui/material/IconButton';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { IconButton, Menu, MenuItem, TextField } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useEffect, useState } from 'react';
-import { FormValuesOrder } from '../../redux/order/types';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem/MenuItem';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import React from 'react';
-import './Order.scss';
-import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
-import { edit, getUserById, registration } from '../../redux/user/user';
+import { edit, getUserById } from '../../redux/user/user';
 import { ROLES } from '../../redux/user/types';
 import { create } from '../../redux/bookmark/bookmark';
 import { TCreateBookmark } from '../../redux/bookmark/types';
+import './Order.scss';
+import { FormValuesOrder, IOrder } from '../../redux/order/types';
 
-// todo: описать интерфейс для пропсов [1]
+type Props = {
+    object: any;
+    onDelete: (id: number) => void;
+    onEdit: (payload: IOrder) => Promise<void>;
+};
 
-const Order = ({ object, onDelete, onEdit }: any) => {
+const Order: React.FC<Props> = ({ object, onDelete, onEdit }) => {
     const [formValues, setFormValues] = useState<FormValuesOrder>({
         name: object.name,
         describe: object.describe,
         filter: object.filter,
     });
     const [editMode, setEditMode] = useState<boolean>(false);
-
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const openOptions = Boolean(anchorEl);
 
     const user = useSelector((state: RootState) => state.user.currentUser);
     const isMyOrder = user.id === object.userId;
-
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -43,6 +42,14 @@ const Order = ({ object, onDelete, onEdit }: any) => {
             // setFormValues({ name: data.payload.name});
         });
     }, []);
+
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     const onClickEdit = () => {
         setEditMode(!editMode);
@@ -62,59 +69,30 @@ const Order = ({ object, onDelete, onEdit }: any) => {
         dispatch(create(payload));
     };
 
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // взять данные инпута
-        setFormValues({ ...formValues, name: event.target.value });
-    };
-
-    const handleChangeSecondary = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        // взять данные инпута
-        setFormValues({ ...formValues, describe: event.target.value });
+    const handleChange = (event: React.ChangeEvent<any>) => {
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
     };
 
     const onClickSave = () => {
-        onEdit({ ...formValues, id: object.id });
+        onEdit({ ...formValues, id: object.id, userId: object.userId });
         setEditMode(false);
     };
-
     return (
-        <div className="order-item" key={object.id} style={{ border: '1px solid black' }}>
-            <div>
+        <div className="order-item" key={object.id}>
+            <div className="order-item__content">
                 {editMode ? (
-                    <input type="text" onChange={handleChange} value={formValues?.name} />
+                    <input type="text" name="name" onChange={handleChange} value={formValues?.name} />
                 ) : (
-                    <div>
+                    <div className="order-item__content__title">
                         {object?.name} {object.userId}
                     </div>
                 )}
                 <br />
-                {editMode ? <textarea name="describe" onChange={handleChangeSecondary} value={formValues?.describe}></textarea> : <div>{object?.describe}</div>}
-            </div>
-
-            <div className="order-item__details">
-                <p>
-                    Отклики <ChatBubbleOutlineIcon></ChatBubbleOutlineIcon>
-                </p>
-                <p>
-                    Просмотры<RemoveRedEyeIcon></RemoveRedEyeIcon>
-                </p>
-                <p>
-                    Добавлено <AccessTimeIcon></AccessTimeIcon>
-                </p>
-            </div>
-            <div className="order-item__price">
-                <div>
-                    Договорная<PaymentsIcon></PaymentsIcon>
-                </div>
-
-                {/* <img></img> */}
+                {editMode ? (
+                    <textarea className="order-item__content__description" name="describe" onChange={handleChange} value={formValues?.describe}></textarea>
+                ) : (
+                    <div>{object?.describe}</div>
+                )}
             </div>
 
             {editMode && (
@@ -122,7 +100,6 @@ const Order = ({ object, onDelete, onEdit }: any) => {
                     <SaveIcon fontSize="small" />
                 </IconButton>
             )}
-
             <IconButton
                 aria-label="more"
                 id="long-button"
@@ -133,7 +110,7 @@ const Order = ({ object, onDelete, onEdit }: any) => {
             >
                 <MoreVertIcon />
             </IconButton>
-            {
+            {openOptions && (
                 <Menu
                     id="long-menu"
                     MenuListProps={{
@@ -145,19 +122,18 @@ const Order = ({ object, onDelete, onEdit }: any) => {
                     PaperProps={{
                         style: {
                             maxHeight: 48 * 4.5,
-                            // width: '20ch',
                         },
                     }}
                 >
                     {isMyOrder && (
-                        <MenuItem key={'1'} onClick={onClickEdit}>
-                            <EditIcon fontSize="small" />
-                        </MenuItem>
-                    )}
-                    {isMyOrder && (
-                        <MenuItem key={'2'} onClick={onClickDelete}>
-                            <DeleteIcon fontSize="small" />
-                        </MenuItem>
+                        <>
+                            <MenuItem key={'1'} onClick={onClickEdit}>
+                                <EditIcon fontSize="small" />
+                            </MenuItem>
+                            <MenuItem key={'2'} onClick={onClickDelete}>
+                                <DeleteIcon fontSize="small" />
+                            </MenuItem>
+                        </>
                     )}
 
                     {!isMyOrder && user.activeRole === ROLES.DEVELOPER && (
@@ -166,7 +142,7 @@ const Order = ({ object, onDelete, onEdit }: any) => {
                         </MenuItem>
                     )}
                 </Menu>
-            }
+            )}
         </div>
     );
 };

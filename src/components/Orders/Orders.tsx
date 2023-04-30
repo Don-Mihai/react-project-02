@@ -107,7 +107,7 @@ function Orders({ className }: Props) {
                 orders
                     ?.filter(order => getArrFromObjByTrue(filters).includes(order.filter) || getArrFromObjByTrue(filters).includes(TYPE_FILTERS.All))
                     ?.filter(object => filterOrders(object, search))
-                    .map((object, index) => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} index={index} />)
+                    .map(object => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} />)
             )}
         </div>
     );

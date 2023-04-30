@@ -1,17 +1,18 @@
 import React from 'react';
 import { useRef, useState, useEffect } from 'react';
 import './CreateOrder.scss';
-import axios from 'axios';
 import { AppDispatch, RootState } from '../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { create } from '../../redux/order/order';
-import { FormValuesOrder, IOrder, TCreateOrder, TYPE_FILTERS } from '../../redux/order/types';
+import { FormValuesOrder, TCreateOrder, TYPE_FILTERS } from '../../redux/order/types';
 import { getUserById } from '../../redux/user/user';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import RadioGroup from '@mui/material/RadioGroup';
 import Radio from '@mui/material/Radio';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function CreateOrder() {
     const [formValues, setFormValues] = useState<FormValuesOrder>({ name: '', describe: '', filter: '' });
@@ -26,21 +27,8 @@ function CreateOrder() {
         dispatch(getUserById(Number(localStorage.getItem('id'))));
     }, []);
 
-    // todo: перенести функцию в Orders и передать в качестве пропса в компонент Order [2]
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // взять данные инпута
-        setFormValues({ ...formValues, name: event.target.value });
-    };
-
-    const handleChangeSecondary = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        // взять данные инпута
-        setFormValues({ ...formValues, describe: event.target.value });
-    };
-
-    const handleChangeThird = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // взять данные инпута
-        setFormValues({ ...formValues, filter: event.target.value });
+    const handleChange = (event: React.ChangeEvent<any>) => {
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
     };
 
     const clearInput = () => {
@@ -60,8 +48,6 @@ function CreateOrder() {
             filter: formValues.filter,
         };
 
-        // console.log
-
         // todo: вынести валидацию в отдельную функцию. на входе она должна принимать объект значений, если валидацию не проходит то должна появится всплывашка [3]
         // валидация на заполнение полей
         if (!formValues?.describe?.length || !formValues?.name?.length || !formValues?.filter?.length) {
@@ -72,32 +58,23 @@ function CreateOrder() {
 
         clearInput();
     };
-
     return (
         <div className="order">
             <h1>Фриланс Биржа</h1>
-            {/* todo: подключить из materialUi инпут для названия заказа [1] */}
-            <input autoFocus ref={inputRef} name="name" className="order__input-name" onChange={handleChange} value={formValues?.name} />
-            {/* todo: подключить из materialUi tesxtarea для описания заказа [1] */}
-            <textarea name="describe" onChange={handleChangeSecondary} value={formValues?.describe}></textarea>
-            {/* todo: подключить из materialUi autocomplete/grouped для сферы деятельности [2] */}
-            {/* todo: подключить из materialUi textfield для ключевых навыков [1] */}
-            <div>
-                <FormControl className="order__radios">
-                    <FormLabel id="demo-radio-buttons-group-label">Сфера деятельности</FormLabel>
-                    <RadioGroup value={formValues.filter} onChange={handleChangeThird}>
-                        <FormControlLabel value={TYPE_FILTERS.DEV} control={<Radio />} label="Разработка" />
-                        <FormControlLabel value={TYPE_FILTERS.TEST} control={<Radio />} label="Тестирование" />
-                        <FormControlLabel value={TYPE_FILTERS.DESIGN} control={<Radio />} label="Дизайн" />
-                    </RadioGroup>
-                </FormControl>
-            </div>
+            <TextField autoFocus inputRef={inputRef} name="name" label="Название заказа" onChange={handleChange} value={formValues.name} />
+            <TextField name="describe" label="Описание заказа" onChange={handleChange} value={formValues.describe} />
+            <FormControl className="order__radios">
+                <FormLabel id="demo-radio-buttons-group-label">Сфера деятельности</FormLabel>
+                <RadioGroup value={formValues.filter} name="filter" onChange={handleChange}>
+                    <FormControlLabel value="dev" control={<Radio />} label="Разработка" />
+                    <FormControlLabel value="test" control={<Radio />} label="Тестирование" />
+                    <FormControlLabel value="design" control={<Radio />} label="Дизайн" />
+                </RadioGroup>
+            </FormControl>
 
-            <div>
-                <button className={'order__button'} onClick={placeOrder}>
-                    Создать заказ
-                </button>
-            </div>
+            <Button className={'order__button'} onClick={placeOrder} variant="contained" color="primary">
+                Создать заказ
+            </Button>
         </div>
     );
 }
