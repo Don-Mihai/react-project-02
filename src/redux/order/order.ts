@@ -26,7 +26,7 @@ export const fetchOrdersByUser = createAsyncThunk('order/fetchOrdersByUser', asy
 
 // создает заказ
 export const create = createAsyncThunk('order/create', async (newOrder: TCreateOrder) => {
-    const data = await axios.post('http://localhost:3001/posts', newOrder);
+    const data = await axios.post('/posts', newOrder);
     const order = data.data;
     return order;
 });
