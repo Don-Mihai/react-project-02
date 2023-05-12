@@ -1,38 +1,58 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const app = express();
+const mongoose = require('mongoose');
 
-const port = 5000;
+const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/posts', (req, res) => {
+const port = 5000;
+
+const Schema = mongoose.Schema;
+
+const userScheme = new Schema(
+    {
+        name: String,
+        describe: String,
+    },
+    { versionKey: false }
+);
+
+const Order = mongoose.model('Order', userScheme);
+
+async function main() {
+    await mongoose.connect('mongodb://127.0.0.1:27017/freelancedb');
+}
+
+main();
+
+app.post('/posts', async (req, res) => {
     const data = req.body;
-    fs.readFile('data.json', (err, jsonData) => {
-        if (err) {
-            console.error(err);
-            res.status(500).send('Error reading data file');
-            return;
-        }
 
-        let dataArray = [];
-        if (jsonData) {
-            dataArray = JSON.parse(jsonData);
-        }
+    const order = await Order.create({ name: data.name, describe: data.describe });
+    res.status(200).send(order);
+});
 
-        dataArray.push(data);
-        fs.writeFile('data.json', JSON.stringify(dataArray), err => {
-            if (err) {
-                console.error(err);
-                res.status(500).send('Error saving data');
-            } else {
-                console.log('Data saved successfully');
-                res.send('Data saved successfully');
-            }
-        });
-    });
+app.get('/posts', async (req, res) => {
+    const orders = await Order.find({});
+    res.status(200).send(orders);
+});
+
+app.post('/order-delete', async (req, res) => {
+    const name = req.body.name;
+
+    const deletedOrder = await Order.findOneAndDelete({ name: name });
+
+    res.status(200).send('ок');
+});
+
+app.post('/order-edit', async (req, res) => {
+    const name = req.body.name;
+
+    const deletedOrder = await Order.updateOne({ name: name }, req.body);
+
+    res.status(200).send('ок');
 });
 
 app.listen(port, () => {

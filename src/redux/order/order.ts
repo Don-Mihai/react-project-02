@@ -13,7 +13,7 @@ const API_URL = 'http://localhost:3001';
 
 // получает все заказы с бэка
 export const fetch = createAsyncThunk('order/fetch', async () => {
-    const response = await axios.get(`${API_URL}/posts`);
+    const response = await axios.get(`/posts`);
     return response.data;
 });
 
@@ -32,12 +32,12 @@ export const create = createAsyncThunk('order/create', async (newOrder: TCreateO
 });
 
 // удаляет заказ
-export const remove = createAsyncThunk('order/remove', async (idOrder: number) => {
-    axios.delete(`http://localhost:3001/posts/${idOrder}`);
+export const remove = createAsyncThunk('order/remove', async (idOrder: object) => {
+    axios.post(`/order-delete/`, idOrder);
 });
 
 export const edit = createAsyncThunk('order/edit', async (payload: IOrder) => {
-    const response = await axios.put(`${API_URL}/posts/${payload.id}`, payload);
+    const response = await axios.put(`/order-edit/${payload.id}`, payload);
     return response.data;
 });
 

@@ -35,9 +35,9 @@ function Orders({ className }: Props) {
         fetchOrders();
     }, []);
 
-    const handleDelete = async (id: number) => {
+    const handleDelete = async (obj: object) => {
         const newOrders: IOrder[] = orders.filter(order => {
-            if (order.id === id) {
+            if (order.id === obj.id) {
                 return false;
             } else {
                 return true;
@@ -47,7 +47,7 @@ function Orders({ className }: Props) {
         setOrders(newOrders);
 
         // Delete из CRUD СИСТЕМЫ
-        dispatch(remove(id));
+        dispatch(remove(obj));
     };
 
     const handleEdit = async (payload: IOrder) => {

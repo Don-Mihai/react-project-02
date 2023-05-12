@@ -57,7 +57,7 @@ const Order: React.FC<Props> = ({ object, onDelete, onEdit }) => {
     };
 
     const onClickDelete = () => {
-        onDelete(object.id);
+        onDelete({ id: object.id, name: object.name });
         handleClose();
     };
 
