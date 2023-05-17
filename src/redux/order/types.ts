@@ -1,5 +1,5 @@
 export interface IOrder {
-    id: number;
+    _id: string;
     name: string;
     describe: string;
     userId: number;
@@ -13,9 +13,9 @@ export enum TYPE_FILTERS {
     All = 'Все',
 }
 
-export type TCreateOrder = Omit<IOrder, 'id'>;
+export type TCreateOrder = Omit<IOrder, '_id'>;
 
-export type FormValuesOrder = Omit<IOrder, 'id' | 'userId'>;
+export type FormValuesOrder = Omit<IOrder, '_id' | 'userId'>;
 
 // дженерик <IOrder[]>
 // interface - для описания типа объекта

@@ -36,8 +36,6 @@ const Filters = () => {
         dispatch(setFilter(formValues));
     };
 
-    console.log(formValues);
-
     return (
         <div className="filters">
             <h2 className="filters__title">Сфера деятельности</h2>

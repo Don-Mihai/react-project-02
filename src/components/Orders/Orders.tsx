@@ -35,9 +35,9 @@ function Orders({ className }: Props) {
         fetchOrders();
     }, []);
 
-    const handleDelete = async (obj: object) => {
+    const handleDelete = async (id: string) => {
         const newOrders: IOrder[] = orders.filter(order => {
-            if (order.id === obj.id) {
+            if (order._id === id) {
                 return false;
             } else {
                 return true;
@@ -46,8 +46,9 @@ function Orders({ className }: Props) {
 
         setOrders(newOrders);
 
+        console.log(orders, id);
         // Delete из CRUD СИСТЕМЫ
-        dispatch(remove(obj));
+        dispatch(remove(id));
     };
 
     const handleEdit = async (payload: IOrder) => {
@@ -72,8 +73,6 @@ function Orders({ className }: Props) {
         return (name && name.includes(search)) || (describe && describe.includes(search));
     };
 
-    const arr = [1, 2, 3, 4, 5, 6, 7];
-    console.log(filters, orders);
     return (
         <div className={`orders ${className}`}>
             <h2>Заказы</h2>

@@ -13,31 +13,30 @@ const API_URL = 'http://localhost:3001';
 
 // получает все заказы с бэка
 export const fetch = createAsyncThunk('order/fetch', async () => {
-    const response = await axios.get(`/posts`);
+    const response = await axios.get(`/order/orders`);
     return response.data;
 });
 
 // получает заказы по конкретному айдишнику
 export const fetchOrdersByUser = createAsyncThunk('order/fetchOrdersByUser', async (idUser: number) => {
-    const response = await axios.get(`${API_URL}/posts?userId=${idUser}`);
-    console.log(response);
+    const response = await axios.post(`/order/by-id`, { id: idUser });
     return response.data;
 });
 
 // создает заказ
 export const create = createAsyncThunk('order/create', async (newOrder: TCreateOrder) => {
-    const data = await axios.post('/posts', newOrder);
+    const data = await axios.post('/order/create', newOrder);
     const order = data.data;
     return order;
 });
 
 // удаляет заказ
-export const remove = createAsyncThunk('order/remove', async (idOrder: object) => {
-    axios.post(`/order-delete/`, idOrder);
+export const remove = createAsyncThunk('order/remove', async (idOrder: string) => {
+    axios.post(`/order/delete`, { _id: idOrder });
 });
 
 export const edit = createAsyncThunk('order/edit', async (payload: IOrder) => {
-    const response = await axios.put(`/order-edit/${payload.id}`, payload);
+    const response = await axios.post(`/order/edit`, payload);
     return response.data;
 });
 

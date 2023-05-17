@@ -12,7 +12,7 @@ const initialState: UserState = {
 const API_URL = 'http://localhost:3001';
 
 export const getUserById = createAsyncThunk('user/getUserById', async (idUser: number) => {
-    const response = await axios.get(`${API_URL}/users/${idUser}`);
+    const response = await axios.post(`user/by-id`, { id: idUser });
     return response.data;
 });
 

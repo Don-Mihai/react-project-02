@@ -19,7 +19,7 @@ import { FormValuesOrder, IOrder } from '../../redux/order/types';
 
 type Props = {
     object: any;
-    onDelete: (id: number) => void;
+    onDelete: (id: string) => void;
     onEdit: (payload: IOrder) => Promise<void>;
 };
 
@@ -57,7 +57,7 @@ const Order: React.FC<Props> = ({ object, onDelete, onEdit }) => {
     };
 
     const onClickDelete = () => {
-        onDelete({ id: object.id, name: object.name });
+        onDelete(object._id);
         handleClose();
     };
 
@@ -74,7 +74,7 @@ const Order: React.FC<Props> = ({ object, onDelete, onEdit }) => {
     };
 
     const onClickSave = () => {
-        onEdit({ ...formValues, id: object.id, userId: object.userId });
+        onEdit({ ...formValues, _id: object._id, userId: object.userId });
         setEditMode(false);
     };
     return (
@@ -96,7 +96,7 @@ const Order: React.FC<Props> = ({ object, onDelete, onEdit }) => {
             </div>
 
             {editMode && (
-                <IconButton onClick={onClickSave} aria-label="delete" size="small" sx={{ position: 'absolute', top: '15px', right: '20px' }}>
+                <IconButton onClick={onClickSave} aria-label="delete" size="small" sx={{ position: 'absolute', top: '0', right: '20px' }}>
                     <SaveIcon fontSize="small" />
                 </IconButton>
             )}
