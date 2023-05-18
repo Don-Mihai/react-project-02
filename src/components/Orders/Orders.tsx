@@ -76,7 +76,6 @@ function Orders({ className }: Props) {
     return (
         <div className={`orders ${className}`}>
             <h2>Заказы</h2>
-            {/* todo: подключить из materialUi searchField [1] */}
             <Box
                 component="form"
                 sx={{
@@ -85,29 +84,22 @@ function Orders({ className }: Props) {
                 noValidate
                 autoComplete="off"
             >
-                <TextField
-                    className="orders__search_input"
-                    onChange={handleChange}
-                    value={search}
-                    id="standard-basic"
-                    label="Поиск..."
-                    variant="standard"
-                    color="warning"
-                />
+                <TextField className="orders__search_input" onChange={handleChange} value={search} id="standard-basic" label="Поиск..." variant="standard" />
             </Box>
-            {/* todo: скрывать поиск когда нет заказов [1] */}
-            {/* <input onChange={handleChange} value={search} placeholder="Поиск..." /> */}
             {/* todo: когда нет заказов отобразить красивую надпись или картинку с инфомрацией о том что нет созданных заказов [2] */}
-            {isLoadingOrders ? (
-                <div className={'progress'}>
-                    <CircularProgress size={70} />
-                </div>
-            ) : (
-                orders
-                    ?.filter(order => getArrFromObjByTrue(filters).includes(order.filter) || getArrFromObjByTrue(filters).includes(TYPE_FILTERS.All))
-                    ?.filter(object => filterOrders(object, search))
-                    .map(object => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} />)
-            )}
+
+            <div className="orders__container">
+                {isLoadingOrders ? (
+                    <div className={'progress'}>
+                        <CircularProgress size={70} />
+                    </div>
+                ) : (
+                    orders
+                        ?.filter(order => getArrFromObjByTrue(filters).includes(order.filter) || getArrFromObjByTrue(filters).includes(TYPE_FILTERS.All))
+                        ?.filter(object => filterOrders(object, search))
+                        .map(object => <Order onDelete={handleDelete} onEdit={handleEdit} object={object} />)
+                )}
+            </div>
         </div>
     );
 }

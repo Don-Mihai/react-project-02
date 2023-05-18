@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { FilterOrders, IOrder, OrderState, TCreateOrder, TYPE_FILTERS, default_filter_obj } from './types';
+import { IOrder, OrderState, TCreateOrder, default_filter_obj } from './types';
 
 const initialState: OrderState = {
     orders: [],
@@ -8,8 +8,6 @@ const initialState: OrderState = {
     filterOrders: default_filter_obj,
     isLoadingFetch: false,
 };
-
-const API_URL = 'http://localhost:3001';
 
 // получает все заказы с бэка
 export const fetch = createAsyncThunk('order/fetch', async () => {

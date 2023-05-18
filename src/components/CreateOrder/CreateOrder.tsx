@@ -24,7 +24,7 @@ function CreateOrder() {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(getUserById(Number(localStorage.getItem('id'))));
+        dispatch(getUserById(localStorage.getItem('id')));
     }, []);
 
     const handleChange = (event: React.ChangeEvent<any>) => {

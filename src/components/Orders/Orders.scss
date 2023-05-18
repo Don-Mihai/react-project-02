@@ -1,6 +1,13 @@
 .orders {
     display: flex;
     flex-direction: column;
+
+    &__container {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 }
 
 .progress {

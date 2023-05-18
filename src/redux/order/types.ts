@@ -2,7 +2,7 @@ export interface IOrder {
     _id: string;
     name: string;
     describe: string;
-    userId: number;
+    userId: string;
     filter: string;
 }
 

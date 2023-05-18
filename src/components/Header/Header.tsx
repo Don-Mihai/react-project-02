@@ -9,7 +9,7 @@ const Header = () => {
                 <img className="header__logo" src={logo} alt="logo"></img>
             </Link>
             <div className="header__navigation">
-                <Link to={'/orders/create'} className="header__navigation_item">
+                <Link to={'/services'} className="header__navigation_item">
                     Для заказчика
                 </Link>
                 <Link to={'/orders'} className="header__navigation_item">
@@ -18,13 +18,13 @@ const Header = () => {
                 <Link to={'/developers'} className="header__navigation_item">
                     Фрилансеры
                 </Link>
-                <Link to={'/orders'} className="header__navigation_item">
+                <Link to={'/contacts'} className="header__navigation_item">
                     Контакты
                 </Link>
             </div>
             <div className="header__block">
                 <div className="tooltip-on-hover">
-                    <Link to={'orders/create'} className="header__block_button">
+                    <Link to={'/orders/create'} className="header__block_button">
                         +
                     </Link>
                 </div>

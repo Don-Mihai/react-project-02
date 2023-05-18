@@ -1,7 +1,7 @@
 export interface IBookmark {
-    id: number;
-    userId: number;
-    orderId: number;
+    id: string;
+    userId: string;
+    orderId: string;
 }
 
 export interface BookmarkState {

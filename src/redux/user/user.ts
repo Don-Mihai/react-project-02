@@ -9,42 +9,34 @@ const initialState: UserState = {
     currentUser: {} as IUser,
 };
 
-const API_URL = 'http://localhost:3001';
-
-export const getUserById = createAsyncThunk('user/getUserById', async (idUser: number) => {
-    const response = await axios.post(`user/by-id`, { id: idUser });
+export const getUserById = createAsyncThunk('user/getUserById', async (idUser: string | null) => {
+    const response = await axios.post(`/user/by-id`, { id: idUser });
     return response.data;
 });
 
 export const getUsers = createAsyncThunk('user/getUsers', async () => {
-    const response = await axios.get(`${API_URL}/users`);
+    const response = await axios.post(`/user/users`);
     return response.data;
 });
 
 // регистрирует пользователя
 export const registration = createAsyncThunk('user/registration', async (newUser: TCreateUser) => {
-    const data = await axios.post(`${API_URL}/users`, newUser);
+    const data = await axios.post(`/user/register`, newUser);
     const user = data.data;
     return user;
 });
 
 // авторизирует пользователя
 export const auth = createAsyncThunk('user/authorization', async (currUser: IAuthUser) => {
-    const data = await axios.get(`${API_URL}/users`);
-    const users: IUser[] = data.data;
-    let result: any = {} as IUser;
+    const data = await axios.post(`/user/auth`, currUser);
 
-    users.forEach(user => {
-        if (user.login === currUser.login && user.password === currUser.password) {
-            result = user;
-        }
-    });
+    const user = data.data;
 
-    return result;
+    return user;
 });
 
 export const edit = createAsyncThunk('user/edit', async (payload: IUser) => {
-    const response = await axios.put(`${API_URL}/users/${payload.id}`, payload);
+    const response = await axios.post(`/user/edit`, payload);
     return response.data;
 });
 

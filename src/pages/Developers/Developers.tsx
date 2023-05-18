@@ -14,7 +14,7 @@ const Developers = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(getUserById(Number(localStorage.getItem('id'))));
+        dispatch(getUserById(localStorage.getItem('id')));
     }, []);
 
     useEffect(() => {

@@ -38,7 +38,7 @@ const Order: React.FC<Props> = ({ object, onDelete, onEdit }) => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(getUserById(Number(localStorage.getItem('id')))).then(data => {
+        dispatch(getUserById(localStorage.getItem('id'))).then(data => {
             // setFormValues({ name: data.payload.name});
         });
     }, []);

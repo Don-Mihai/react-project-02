@@ -11,6 +11,7 @@ import Authorization from './pages/Authorization';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Profile from './pages/Profile';
+import ContactListPage from './pages/Contacts';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
     {
         path: '/developers',
         element: <Developers />,
+    },
+    {
+        path: '/services',
+        element: <div> </div>,
+    },
+    {
+        path: '/contacts',
+        element: <ContactListPage />,
     },
     {
         path: '/sign-up',

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userScheme = new Schema(
+const orderScheme = new Schema(
     {
         _id: { type: String, default: shortid.generate() },
         name: String,
@@ -13,6 +13,6 @@ const userScheme = new Schema(
     { versionKey: false }
 );
 
-const OrderModel = mongoose.model('OrderModel', userScheme);
+const OrderModel = mongoose.model('OrderModel', orderScheme);
 
 module.exports = OrderModel;

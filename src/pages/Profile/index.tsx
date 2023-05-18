@@ -35,7 +35,7 @@ const Profile = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(getUserById(Number(localStorage.getItem('id')))).then(data => {
+        dispatch(getUserById(localStorage.getItem('id'))).then(data => {
             setFormValues({
                 name: data.payload.name,
                 surname: data.payload.surname,
@@ -161,6 +161,7 @@ const Profile = () => {
                     </Button>
                 </div>
 
+                {/* todo: сделать загрузку фотографие при перетаскивании */}
                 <Dialog open={open} onClose={handleClose} aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
                     <DialogTitle id="alert-dialog-title">Редактирование аватарки</DialogTitle>
                     <DialogContent>
