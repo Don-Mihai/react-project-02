@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { IAuthUser, IUser, TCreateUser, UserState } from './types';
-import isEqual from 'lodash/isEqual';
 
 const initialState: UserState = {
     users: [],
@@ -10,8 +9,21 @@ const initialState: UserState = {
 };
 
 export const getUserById = createAsyncThunk('user/getUserById', async (idUser: string | null) => {
-    const response = await axios.post(`/user/by-id`, { id: idUser });
-    return response.data;
+    const token = localStorage.getItem('id');
+
+    let response: any = {};
+
+    if (idUser) {
+        response = await axios.post(`/user/by-id`, { id: idUser });
+    } else {
+        response = await axios.get(`/user/my`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    }
+
+    return response?.data;
 });
 
 export const getUsers = createAsyncThunk('user/getUsers', async () => {

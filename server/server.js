@@ -1,6 +1,8 @@
 const express = require('express');
+require('dotenv').config();
 const bodyParser = require('body-parser');
 const OrdersRoutes = require('./routes/OrdersRoutes');
+const ServiceRoutes = require('./routes/ServiceRoutes');
 const UserRoutes = require('./routes/UserRoutes');
 const BookmarkRoutes = require('./routes/BookmarkRoutes');
 const conectDb = require('./config/bd');
@@ -15,8 +17,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
+// todo: поправить раздачу статики
 app.use('/uploads', express.static('/uploads'));
 
 // Конфигурация Multer для загрузки файлов
@@ -47,6 +50,8 @@ app.post('/upload', upload.single('image'), (req, res) => {
 
     res.status(200).send(filename);
 });
+
+app.use('/service', ServiceRoutes);
 
 app.use('/order', OrdersRoutes);
 

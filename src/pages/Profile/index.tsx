@@ -35,7 +35,7 @@ const Profile = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
-        dispatch(getUserById(localStorage.getItem('id'))).then(data => {
+        dispatch(getUserById(null)).then(data => {
             setFormValues({
                 name: data.payload.name,
                 surname: data.payload.surname,

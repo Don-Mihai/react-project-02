@@ -4,10 +4,13 @@ const getUsers = require('../controllers/users/getUsers');
 const registerUser = require('../controllers/users/registerUser');
 const authUser = require('../controllers/users/authUser');
 const editUser = require('../controllers/users/editUser');
+const getMyUser = require('../controllers/users/getMyUser');
 
 const router = express.Router();
 
-router.route('/by-id').post(getUser);
+router.route('/by-id').get(getUser);
+
+router.route('/my').get(getMyUser);
 
 router.route('/users').post(getUsers);
 

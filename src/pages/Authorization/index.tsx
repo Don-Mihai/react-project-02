@@ -26,10 +26,10 @@ const Authorization = () => {
 
         const data = await dispatch(auth(payload));
 
-        if (data.payload.id) {
+        if (data.payload.token) {
             navigate('/my/profile');
 
-            localStorage.setItem('id', data.payload.id);
+            localStorage.setItem('id', data.payload.token);
         }
     };
 

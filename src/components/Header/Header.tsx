@@ -1,8 +1,16 @@
 import './Header.scss';
 import logo from './logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { IconButton } from '@mui/material';
 
 const Header = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('id');
+        navigate('/sign-up');
+    };
     return (
         <header className="header">
             <Link to={'/'}>
@@ -32,6 +40,9 @@ const Header = () => {
                 <Link to={'/my/profile'} className="header__navigation header__navigation_item-pers">
                     Личный кабинет
                 </Link>
+                <IconButton onClick={handleLogout}>
+                    <LogoutIcon />
+                </IconButton>
             </div>
             <div className="hamburger-menu">
                 <input id="menu__toggle" type="checkbox" />

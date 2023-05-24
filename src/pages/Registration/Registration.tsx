@@ -9,7 +9,7 @@ import { registration } from '../../redux/user/user';
 import './Registration.scss';
 
 const Registration = () => {
-    const [formValues, setFormValues] = useState<TCreateUser>({ login: '', password: '', surname: '', name: '' });
+    const [formValues, setFormValues] = useState<TCreateUser>({ login: '', password: '', surname: '', name: '', email: '' });
     const [activeStep, setActiveStep] = useState(1);
 
     const dispatch = useDispatch<AppDispatch>();
@@ -26,10 +26,11 @@ const Registration = () => {
             password: formValues.password,
             name: formValues.name,
             surname: formValues.surname,
+            email: formValues.email,
         };
 
         navigate('/');
-        dispatch(registration(payload)).then(data => localStorage.setItem('id', data.payload.id));
+        dispatch(registration(payload)).then(data => localStorage.setItem('id', data.payload.token));
     };
 
     return (
@@ -46,6 +47,7 @@ const Registration = () => {
                         <div className="registration__inputs">
                             <TextField value={formValues.login} onChange={handleChange} name={'login'} label="Логин" variant="outlined" fullWidth />
                             <TextField value={formValues.password} onChange={handleChange} name={'password'} label="Пароль" variant="outlined" fullWidth />
+                            <TextField value={formValues.email} onChange={handleChange} name={'email'} label="Почта" variant="outlined" fullWidth />
                         </div>
                         <Button onClick={() => setActiveStep(2)} variant="outlined">
                             Далее
