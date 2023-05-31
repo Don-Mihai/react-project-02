@@ -28,6 +28,7 @@ function Chat() {
         }, 1000);
 
         return () => clearInterval(interval);
+        // @ts-ignore
     }, [activeUser._id, user._id]);
 
     const subcribe = async () => {
@@ -55,6 +56,7 @@ function Chat() {
             content: formValues.content,
             // @ts-ignore
             sender: user._id,
+            // @ts-ignore
             recipient: activeUser._id,
         };
         axios.post('/message/send', payload);
