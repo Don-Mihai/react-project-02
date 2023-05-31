@@ -17,7 +17,7 @@ const Header = () => {
                 <img className="header__logo" src={logo} alt="logo"></img>
             </Link>
             <div className="header__navigation">
-                <Link to={'/services'} className="header__navigation_item">
+                <Link to={'/custumer'} className="header__navigation_item">
                     Для заказчика
                 </Link>
                 <Link to={'/orders'} className="header__navigation_item">

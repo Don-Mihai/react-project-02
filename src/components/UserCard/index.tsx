@@ -5,11 +5,12 @@ import { deepOrange } from '@mui/material/colors';
 
 interface Props {
     user: IUser;
+    onClick?: () => void;
 }
 
-const UserCard = ({ user }: Props) => {
+const UserCard = ({ user, onClick }: Props) => {
     return (
-        <div className="user-card">
+        <div onClick={onClick} className="user-card">
             <div className="user-card__avatar-container">
                 <Avatar sx={{ bgcolor: deepOrange[500], height: '70px', width: '70px' }} alt="Remy Sharp" src={user.imgUrl}>
                     {user.name[0]} {user.surname[0]}

@@ -12,6 +12,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import Profile from './pages/Profile';
 import ContactListPage from './pages/Contacts';
+import Customer from './pages/Сustomer/Customer';
+import Chat from './components/Chat';
 
 const router = createBrowserRouter([
     {
@@ -32,8 +34,8 @@ const router = createBrowserRouter([
         element: <Developers />,
     },
     {
-        path: '/services',
-        element: <div> </div>,
+        path: '/custumer',
+        element: <Customer />,
     },
     {
         path: '/contacts',
@@ -58,6 +60,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <Provider store={store}>
-        <RouterProvider router={router} />
+        <>
+            <RouterProvider router={router} />
+            <Chat />
+        </>
     </Provider>
 );

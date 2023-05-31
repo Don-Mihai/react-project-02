@@ -3,12 +3,16 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const OrdersRoutes = require('./routes/OrdersRoutes');
 const ServiceRoutes = require('./routes/ServiceRoutes');
+const MessageRoutes = require('./routes/MessageRoutes');
 const UserRoutes = require('./routes/UserRoutes');
 const BookmarkRoutes = require('./routes/BookmarkRoutes');
 const conectDb = require('./config/bd');
 const multer = require('multer');
 const path = require('path');
 const Image = require('./model/ImageModel');
+const events = require('events');
+
+const emmiter = new events.EventEmitter();
 
 conectDb();
 
@@ -52,6 +56,8 @@ app.post('/upload', upload.single('image'), (req, res) => {
 });
 
 app.use('/service', ServiceRoutes);
+
+app.use('/message', MessageRoutes);
 
 app.use('/order', OrdersRoutes);
 

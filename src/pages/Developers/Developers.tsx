@@ -28,7 +28,7 @@ const Developers = () => {
                 <div className="page-module__container">
                     <h2 className="page-module__title">Фрилансеры</h2>
                     {users.map(user => (
-                        <UserCard user={user}></UserCard>
+                        <UserCard user={user} />
                     ))}
                 </div>
 
