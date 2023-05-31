@@ -23,25 +23,24 @@ function Chat() {
     const user = useSelector((state: RootState) => state.user.currentUser);
 
     useEffect(() => {
+        const subcribe = async () => {
+            const data = await axios.post('/message/messages-user', {
+                // @ts-ignore
+                sender: user._id,
+                // @ts-ignore
+                recipient: activeUser._id,
+            });
+
+            console.log(user);
+            setMessages(data.data);
+        };
         const interval = setInterval(() => {
             subcribe();
         }, 1000);
 
         return () => clearInterval(interval);
         // @ts-ignore
-    }, [activeUser._id, user._id]);
-
-    const subcribe = async () => {
-        const data = await axios.post('/message/messages-user', {
-            // @ts-ignore
-            sender: user._id,
-            // @ts-ignore
-            recipient: activeUser._id,
-        });
-
-        console.log(user);
-        setMessages(data.data);
-    };
+    }, [activeUser._id, user._id, user]);
 
     const handleClickUser = (user: IUser) => {
         setActiveUser(user);

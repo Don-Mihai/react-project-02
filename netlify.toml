@@ -1,4 +1,4 @@
 [build]
-    command = "node server/server.js"
+    command = "node server/server.js --no-warnings"
     publish = "/public"
     base = "/"

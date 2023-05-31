@@ -48,7 +48,7 @@ export default function ChatModal({ open, handleClose, messages, handleSendMessa
 
     React.useEffect(() => {
         dispatch(getUsers());
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
