@@ -10,9 +10,6 @@ const conectDb = require('./config/bd');
 const multer = require('multer');
 const path = require('path');
 const Image = require('./model/ImageModel');
-const events = require('events');
-
-const emmiter = new events.EventEmitter();
 
 conectDb();
 
@@ -23,7 +20,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = process.env.PORT || 5000;
 
-// todo: поправить раздачу статики
 app.use('/uploads', express.static('/uploads'));
 
 // Конфигурация Multer для загрузки файлов

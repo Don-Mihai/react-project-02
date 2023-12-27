@@ -1,10 +1,10 @@
-# Getting Started with Create React App
+# Начало работы с Биржой фриланса
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Этот проект был создан с использованием [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Доступные команды
 
-In the project directory, you can run:
+В директории проекта вы можете выполнить следующие команды:
 
 ### `npm start`
 

@@ -80,7 +80,7 @@ const Profile = () => {
         };
 
         if (!formValues.name?.length || !formValues?.surname?.length) {
-            showNotification('Пацаны к успеху шли', 'warning');
+            showNotification('Заполните обязательные поля', 'warning');
             return;
         }
 

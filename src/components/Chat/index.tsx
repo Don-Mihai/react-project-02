@@ -31,7 +31,6 @@ function Chat() {
                 recipient: activeUser._id,
             });
 
-            console.log(user);
             setMessages(data.data);
         };
         const interval = setInterval(() => {
